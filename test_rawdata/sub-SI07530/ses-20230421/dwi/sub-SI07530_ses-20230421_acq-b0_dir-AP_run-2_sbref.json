@@ -1,0 +1,2253 @@
+{
+  "AcquisitionMatrixPE": 120,
+  "AcquisitionNumber": 1,
+  "AcquisitionTime": "15:45:5.057500",
+  "BandwidthPerPixelPhaseEncode": 13.661,
+  "BaseResolution": 120,
+  "BodyPartExamined": "BRAIN",
+  "CoilCombinationMethod": "Sum of Squares",
+  "CoilString": "HeadNeck_64",
+  "ConversionSoftware": "dcm2niix",
+  "ConversionSoftwareVersion": "v1.0.20230121",
+  "DerivedVendorReportedEchoSpacing": 0.000610009,
+  "DeviceSerialNumber": "166281",
+  "DwellTime": 2.1e-06,
+  "EchoTime": 0.0794,
+  "EchoTrainLength": 90,
+  "EffectiveEchoSpacing": 0.000610009,
+  "FlipAngle": 78,
+  "HeudiconvVersion": "0.11.3",
+  "ImageComments": "GCO-20-0158, Single-band reference SENSE1",
+  "ImageOrientationPatientDICOM": [0.997619, -0.0396171, -0.0564504, 0.024207, 0.967613, -0.251277],
+  "ImageType": [
+    "ORIGINAL",
+    "PRIMARY",
+    "M",
+    "ND",
+    "NORM",
+    "MFSPLIT"
+],
+  "ImageTypeText": [
+    "ORIGINAL",
+    "PRIMARY",
+    "M",
+    "NONE"
+],
+  "ImagingFrequency": 123.231,
+  "InPlanePhaseEncodingDirectionDICOM": "COL",
+  "InstitutionAddress": "1470 Madison Avenue ,New York,,US,10029",
+  "InstitutionName": "BMEII - Icahn School of Medicine at Mount Sinai",
+  "MRAcquisitionType": "2D",
+  "MagneticFieldStrength": 3,
+  "Manufacturer": "Siemens",
+  "ManufacturersModelName": "MAGNETOM Prisma",
+  "MatrixCoilMode": "SENSE",
+  "Modality": "MR",
+  "NonlinearGradientCorrection": false,
+  "PartialFourier": 0.75,
+  "PatientPosition": "HFS",
+  "PercentPhaseFOV": 100,
+  "PercentSampling": 100,
+  "PhaseEncodingDirection": "j-",
+  "PhaseEncodingSteps": 120,
+  "PhaseResolution": 1,
+  "PixelBandwidth": 1984,
+  "ProcedureStepDescription": "GCO-20-0158",
+  "ProtocolName": "dMRI_b0_AP",
+  "PulseSequenceDetails": "%CustomerSeq%\\cmrr_mbep2d_diff",
+  "ReceiveCoilActiveElements": "HC1-7",
+  "ReceiveCoilName": "HeadNeck_64",
+  "ReconMatrixPE": 120,
+  "RepetitionTime": 3.2,
+  "SAR": 0.178591,
+  "ScanOptions": "PFP\\PER",
+  "ScanningSequence": "GR\\EP",
+  "SequenceName": "epse2d1_120",
+  "SequenceVariant": "SK",
+  "SeriesDescription": "dMRI_b0_AP_SBRef",
+  "SeriesNumber": 35,
+  "ShimSetting": [-818, -11505, -5253, 474, 10, -46, 6, 25],
+  "SliceThickness": 1.8,
+  "SliceTiming": [0, 0.1175, 0.235, 0.3525, 0.47, 0.5875, 0.7075, 0.825, 0.9425, 1.06, 1.1775, 1.295, 1.4125, 1.53, 1.6475, 1.7675, 1.885, 2.0025, 2.12, 2.2375, 2.355, 2.4725, 2.59, 2.7075, 2.825, 2.945, 3.0625, 3.18, 3.2975, 3.415, 3.5325, 3.65, 3.7675, 3.885, 4.005, 4.1225, 4.24, 4.3575, 4.475, 4.5925, 4.71, 4.8275, 4.945, 5.065, 5.1825, 5.3, 5.4175, 5.535, 5.6525, 5.77, 5.8875, 6.005, 6.125, 6.2425, 6.36, 6.4775, 6.595, 6.7125, 6.83, 6.9475, 7.065, 7.1825, 7.3025, 7.42, 7.5375, 7.655, 7.7725, 7.89, 8.0075, 8.125, 8.2425, 8.3625, 8.48, 8.5975, 8.715, 8.8325, 8.95, 9.0675, 9.185, 9.3025, 9.4225],
+  "SoftwareVersions": "syngo MR XA30",
+  "SpacingBetweenSlices": 1.8,
+  "StationName": "AWP166281",
+  "TotalReadoutTime": 0.0725911,
+  "TxRefAmp": 262.78,
+  "WipMemBlock": "337c7406-3457-4a92-a38a-36e1637f7386||Sequence: R017 nxva30a/master r/d34922cc2+; Jun 27 2022 13:23:04 by eja",
+  "dcmmeta_affine": [
+    [-1.795714259147644, 0.043572600930929184, -0.11599999666213989, 109.59385681152344],
+    [0.07131078094244003, 1.7417033910751343, -0.4490000009536743, -57.69870376586914],
+    [-0.10161072015762329, 0.4522986114025116, 1.7400000095367432, -59.16853332519531],
+    [0.0, 0.0, 0.0, 1.0]
+],
+  "dcmmeta_reorient_transform": [
+    [0.0, -1.0, 0.0, 119.0],
+    [1.0, 0.0, 0.0, 0.0],
+    [0.0, 0.0, -1.0, 80.0],
+    [0.0, 0.0, 0.0, 1.0]
+],
+  "dcmmeta_shape": [120, 120, 81],
+  "dcmmeta_slice_dim": 2,
+  "dcmmeta_version": 0.6,
+  "global": {
+    "const": {
+      "AccessionNumber": "deidentified",
+      "AcquisitionMatrix": [120, 0, 0, 120],
+      "AcquisitionNumber": 1,
+      "AngioFlag": "N",
+      "BeatRejectionFlag": "N",
+      "BitsAllocated": 16,
+      "BitsStored": 16,
+      "BodyPartExamined": "BRAIN",
+      "BurnedInAnnotation": "NO",
+      "CardiacNumberOfImages": 1,
+      "Columns": 120,
+      "ContentQualification": "RESEARCH",
+      "ContentTime": "154522.437000",
+      "DeidentificationMethodCodeSequence": [
+        {
+          "CodeMeaning": "XNAT DicomEdit 6 Script",
+          "CodeValue": "1089",
+          "CodingSchemeDesignator": "XNAT",
+          "CodingSchemeVersion": "1.0"}
+],
+      "EchoTime": 79.4,
+      "EchoTrainLength": 90,
+      "FlipAngle": 78.0,
+      "HighBit": 15,
+      "ImageOrientationPatient": [0.997619, -0.0396171, -0.0564504, 0.024207, 0.967613, -0.251277],
+      "ImageType": [
+        "ORIGINAL",
+        "PRIMARY",
+        "M",
+        "ND",
+        "NORM",
+        "MFSPLIT"
+],
+      "ImagedNucleus": "1H",
+      "ImagingFrequency": 123.230639,
+      "InPlanePhaseEncodingDirection": "COL",
+      "InstanceCreationTime": "154505.057500",
+      "LargestImagePixelValue": 65535,
+      "LossyImageCompression": "00",
+      "MRAcquisitionType": "2D",
+      "MagneticFieldStrength": 3.0,
+      "Manufacturer": "Siemens Healthineers",
+      "ManufacturerModelName": "MAGNETOM Prisma",
+      "Modality": "MR",
+      "NumberOfAverages": 1.0,
+      "NumberOfPhaseEncodingSteps": 120,
+      "NumberOfTemporalPositions": 7,
+      "PercentPhaseFieldOfView": 100.0,
+      "PercentSampling": 100.0,
+      "PerformedProcedureStepStartTime": "150428.200000",
+      "PhotometricInterpretation": "MONOCHROME2",
+      "PixelBandwidth": 1984.0,
+      "PixelRepresentation": 0,
+      "PixelSpacing": [1.8, 1.8],
+      "PresentationLUTShape": "IDENTITY",
+      "ProcedureCodeSequence": [
+        {
+          "CodeMeaning": "RE MRI BRAIN WITHOUT CONTRAST",
+          "CodeValue": "MRNBRAIN0",
+          "CodingSchemeDesignator": "LOCAL"
+        }
+],
+      "ProtocolName": "dMRI_b0_AP",
+      "ReceiveCoilName": "HeadNeck_64",
+      "ReferencedStudySequence": [
+        {
+          "ReferencedSOPClassUID": "1.2.840.10008.3.1.2.3.1",
+          "ReferencedSOPInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+      "RepetitionTime": 3200.0,
+      "RequestAttributesSequence": [
+        {
+          "AccessionNumber": "1009433118",
+          "ReferencedStudySequence": [
+            {
+              "ReferencedSOPClassUID": "1.2.840.10008.3.1.2.3.1",
+              "ReferencedSOPInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+          "RequestedProcedureCodeSequence": [
+            {
+              "CodeMeaning": "RE MRI BRAIN WITHOUT CONTRAST",
+              "CodeValue": "MRNBRAIN0",
+              "CodingSchemeDesignator": "LOCAL"
+            }
+],
+          "RequestedProcedureDescription": "RE MRI BRAIN WITHOUT CONTRAST",
+          "RequestedProcedureID": "1009433118",
+          "ScheduledProcedureStepDescription": "RE MRI BRAIN WITHOUT CONTRAST",
+          "ScheduledProcedureStepID": "22377641",
+          "ScheduledProtocolCodeSequence": [],
+          "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+      "RescaleIntercept": 0.0,
+      "RescaleSlope": 1.0,
+      "Rows": 120,
+      "SAR": 0.17859105372691,
+      "SamplesPerPixel": 1,
+      "ScanOptions": [
+        "PFP",
+        "PER"
+],
+      "ScanningSequence": [
+        "GR",
+        "EP"
+],
+      "SequenceName": "epse2d1_120",
+      "SequenceVariant": "SK",
+      "SeriesDescription": "dMRI_b0_AP_SBRef",
+      "SeriesNumber": 35,
+      "SeriesTime": "154515.625000",
+      "SliceThickness": 1.8,
+      "SmallestImagePixelValue": 0,
+      "SoftwareVersions": "syngo MR XA30",
+      "SpacingBetweenSlices": 1.8,
+      "SpecificCharacterSet": "ISO_IR 100",
+      "StudyID": "1009433118",
+      "StudyTime": "150428.200000",
+      "TransmitCoilName": "Body"
+    },
+    "slices": {
+      "AcquisitionTime": ["154505.057500", "154505.175000", "154505.292500", "154505.410000", "154505.530000", "154505.647500", "154505.765000", "154505.882500", "154506.000000", "154506.117500", "154506.235000", "154506.352500", "154506.470000", "154506.590000", "154506.707500", "154506.825000", "154506.942500", "154507.060000", "154507.177500", "154507.295000", "154507.412500", "154507.530000", "154507.650000", "154507.767500", "154507.885000", "154508.002500", "154508.120000", "154508.237500", "154508.355000", "154508.472500", "154508.590000", "154508.707500", "154508.827500", "154508.945000", "154509.062500", "154509.180000", "154509.297500", "154509.415000", "154509.532500", "154509.650000", "154509.767500", "154509.887500", "154510.005000", "154510.122500", "154510.240000", "154510.357500", "154510.475000", "154510.592500", "154510.710000", "154510.827500", "154510.947500", "154511.065000", "154511.182500", "154511.300000", "154511.417500", "154511.535000", "154511.652500", "154511.770000", "154511.887500", "154512.007500", "154512.125000", "154512.242500", "154512.360000", "154512.477500", "154512.595000", "154512.712500", "154512.830000", "154512.947500", "154513.065000", "154513.185000", "154513.302500", "154513.420000", "154513.537500", "154513.655000", "154513.772500", "154513.890000", "154514.007500", "154514.125000", "154514.245000", "154514.362500", "154514.480000"],
+      "ConversionSourceAttributesSequence": [
+        [
+          {
+            "ReferencedFrameNumber": 1,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 2,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 3,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 4,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 5,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 6,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 7,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 8,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 9,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 10,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 11,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 12,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 13,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 14,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 15,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 16,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 17,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 18,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 19,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 20,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 21,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 22,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 23,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 24,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 25,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 26,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 27,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 28,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 29,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 30,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 31,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 32,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 33,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 34,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 35,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 36,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 37,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 38,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 39,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 40,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 41,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 42,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 43,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 44,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 45,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 46,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 47,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 48,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 49,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 50,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 51,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 52,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 53,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 54,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 55,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 56,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 57,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 58,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 59,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 60,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 61,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 62,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 63,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 64,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 65,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 66,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 67,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 68,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 69,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 70,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 71,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 72,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 73,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 74,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 75,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 76,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 77,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 78,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 79,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 80,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+        [
+          {
+            "ReferencedFrameNumber": 81,
+            "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+            "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+]
+],
+      "ImagePositionPatient": [
+        [-114.798, -149.545, -5.288],
+        [-114.681, -149.096, -3.54872],
+        [-114.565, -148.648, -1.80944],
+        [-114.449, -148.199, -0.0701563],
+        [-114.333, -147.75, 1.66913],
+        [-114.216, -147.301, 3.40841],
+        [-114.1, -146.853, 5.14769],
+        [-113.984, -146.404, 6.88697],
+        [-113.868, -145.955, 8.62625],
+        [-113.751, -145.506, 10.3655],
+        [-113.635, -145.058, 12.1048],
+        [-113.519, -144.609, 13.8441],
+        [-113.403, -144.16, 15.5834],
+        [-113.287, -143.711, 17.3227],
+        [-113.17, -143.262, 19.062],
+        [-113.054, -142.814, 20.8012],
+        [-112.938, -142.365, 22.5405],
+        [-112.822, -141.916, 24.2798],
+        [-112.705, -141.467, 26.0191],
+        [-112.589, -141.019, 27.7584],
+        [-112.473, -140.57, 29.4976],
+        [-112.357, -140.121, 31.2369],
+        [-112.24, -139.672, 32.9762],
+        [-112.124, -139.224, 34.7155],
+        [-112.008, -138.775, 36.4548],
+        [-111.892, -138.326, 38.1941],
+        [-111.775, -137.877, 39.9333],
+        [-111.659, -137.429, 41.6726],
+        [-111.543, -136.98, 43.4119],
+        [-111.427, -136.531, 45.1512],
+        [-111.31, -136.082, 46.8905],
+        [-111.194, -135.634, 48.6298],
+        [-111.078, -135.185, 50.369],
+        [-110.962, -134.736, 52.1083],
+        [-110.846, -134.287, 53.8476],
+        [-110.729, -133.838, 55.5869],
+        [-110.613, -133.39, 57.3262],
+        [-110.497, -132.941, 59.0654],
+        [-110.381, -132.492, 60.8047],
+        [-110.264, -132.043, 62.544],
+        [-110.148, -131.595, 64.2833],
+        [-110.032, -131.146, 66.0226],
+        [-109.916, -130.697, 67.7619],
+        [-109.799, -130.248, 69.5011],
+        [-109.683, -129.8, 71.2404],
+        [-109.567, -129.351, 72.9797],
+        [-109.451, -128.902, 74.719],
+        [-109.334, -128.453, 76.4583],
+        [-109.218, -128.005, 78.1976],
+        [-109.102, -127.556, 79.9368],
+        [-108.986, -127.107, 81.6761],
+        [-108.869, -126.658, 83.4154],
+        [-108.753, -126.21, 85.1547],
+        [-108.637, -125.761, 86.894],
+        [-108.521, -125.312, 88.6332],
+        [-108.405, -124.863, 90.3725],
+        [-108.288, -124.414, 92.1118],
+        [-108.172, -123.966, 93.8511],
+        [-108.056, -123.517, 95.5904],
+        [-107.94, -123.068, 97.3297],
+        [-107.823, -122.619, 99.0689],
+        [-107.707, -122.171, 100.808],
+        [-107.591, -121.722, 102.548],
+        [-107.475, -121.273, 104.287],
+        [-107.358, -120.824, 106.026],
+        [-107.242, -120.376, 107.765],
+        [-107.126, -119.927, 109.505],
+        [-107.01, -119.478, 111.244],
+        [-106.893, -119.029, 112.983],
+        [-106.777, -118.581, 114.722],
+        [-106.661, -118.132, 116.462],
+        [-106.545, -117.683, 118.201],
+        [-106.428, -117.234, 119.94],
+        [-106.312, -116.786, 121.68],
+        [-106.196, -116.337, 123.419],
+        [-106.08, -115.888, 125.158],
+        [-105.963, -115.439, 126.897],
+        [-105.847, -114.99, 128.637],
+        [-105.731, -114.542, 130.376],
+        [-105.615, -114.093, 132.115],
+        [-105.499, -113.644, 133.855]
+],
+      "InstanceNumber": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81],
+      "RelatedSeriesSequence": [
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 1,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 2,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 3,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 4,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 5,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 6,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 7,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 8,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 9,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 10,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 11,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 12,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 13,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 14,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 15,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 16,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 17,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 18,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 19,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 20,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 21,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 22,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 23,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 24,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 25,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 26,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 27,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 28,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 29,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 30,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 31,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 32,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 33,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 34,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 35,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 36,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 37,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 38,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 39,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 40,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 41,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 42,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 43,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 44,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 45,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 46,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 47,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 48,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 49,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 50,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 51,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 52,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 53,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 54,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 55,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 56,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 57,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 58,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 59,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 60,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 61,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 62,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 63,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 64,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 65,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 66,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 67,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 68,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 69,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 70,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 71,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 72,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 73,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 74,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 75,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 76,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 77,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 78,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 79,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 80,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+],
+        [
+          {
+            "PurposeOfReferenceCodeSequence": [
+              {
+                "CodeMeaning": "Alternate SOP Class instance",
+                "CodeValue": "121326",
+                "CodingSchemeDesignator": "DCM"
+              }
+],
+            "ReferencedImageSequence": [
+              {
+                "ReferencedFrameNumber": 81,
+                "ReferencedSOPClassUID": "1.2.840.10008.5.1.4.1.1.4.1",
+                "ReferencedSOPInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715451559100290544"}
+],
+            "SeriesInstanceUID": "1.3.12.2.1107.5.2.43.166281.2023040715450389593890463.0.0.0",
+            "StudyInstanceUID": "1.2.840.113745.101000.1111000.45020.5159.52006859"}
+]
+],
+      "SliceLocation": [-49.8063, -48.0063, -46.2063, -44.4063, -42.6063, -40.8063, -39.0063, -37.2063, -35.4063, -33.6063, -31.8063, -30.0063, -28.2063, -26.4063, -24.6063, -22.8063, -21.0063, -19.2063, -17.4063, -15.6063, -13.8063, -12.0063, -10.2063, -8.40628, -6.60628, -4.80628, -3.00628, -1.20628, 0.593719, 2.39372, 4.19372, 5.99372, 7.79372, 9.59372, 11.3937, 13.1937, 14.9937, 16.7937, 18.5937, 20.3937, 22.1937, 23.9937, 25.7937, 27.5937, 29.3937, 31.1937, 32.9937, 34.7937, 36.5937, 38.3937, 40.1937, 41.9937, 43.7937, 45.5937, 47.3937, 49.1937, 50.9937, 52.7937, 54.5937, 56.3937, 58.1937, 59.9937, 61.7937, 63.5937, 65.3937, 67.1937, 68.9937, 70.7937, 72.5937, 74.3937, 76.1937, 77.9937, 79.7937, 81.5937, 83.3937, 85.1937, 86.9937, 88.7937, 90.5937, 92.3937, 94.1937],
+      "WindowCenter": [5756.0, 6488.0, 6153.0, 3864.0, 3401.0, 3244.0, 3457.0, 3126.0, 4222.0, 6821.0, 7063.0, 6839.0, 7198.0, 7316.0, 7300.0, 7328.0, 7566.0, 7452.0, 7441.0, 7108.0, 7112.0, 6844.0, 7502.0, 7625.0, 7768.0, 8128.0, 8451.0, 8506.0, 8370.0, 8471.0, 7985.0, 8116.0, 8088.0, 8041.0, 7937.0, 8166.0, 8264.0, 8334.0, 8187.0, 7890.0, 7961.0, 8077.0, 8120.0, 8253.0, 8016.0, 8052.0, 7918.0, 7552.0, 7239.0, 6903.0, 6685.0, 6641.0, 6850.0, 7132.0, 6497.0, 6941.0, 6640.0, 6607.0, 6497.0, 5860.0, 6431.0, 6262.0, 6336.0, 6446.0, 6497.0, 6281.0, 6388.0, 6033.0, 6581.0, 6297.0, 6467.0, 6533.0, 6560.0, 6681.0, 5853.0, 3995.0, 2366.0, 1183.0, 845.0, 935.0, 1252.0],
+      "WindowWidth": [14933.0, 15487.0, 14950.0, 10265.0, 9211.0, 8914.0, 9343.0, 8900.0, 11157.0, 15754.0, 15957.0, 15426.0, 16142.0, 16333.0, 16213.0, 16192.0, 16790.0, 16586.0, 16644.0, 15894.0, 15919.0, 15522.0, 17042.0, 17439.0, 17732.0, 18601.0, 19486.0, 19905.0, 19080.0, 18554.0, 17200.0, 17323.0, 17296.0, 17372.0, 17276.0, 17825.0, 18218.0, 18465.0, 18166.0, 17683.0, 17826.0, 18018.0, 18134.0, 18462.0, 18062.0, 18168.0, 18002.0, 17164.0, 16089.0, 15130.0, 14441.0, 14402.0, 14774.0, 15356.0, 14118.0, 15048.0, 14402.0, 14395.0, 14175.0, 12835.0, 14015.0, 13731.0, 13961.0, 14131.0, 14156.0, 13761.0, 13997.0, 13253.0, 14246.0, 13731.0, 13947.0, 13967.0, 14009.0, 14018.0, 12588.0, 9291.0, 5972.0, 3366.0, 2524.0, 2776.0, 3468.0]
+    }
+  }
+}

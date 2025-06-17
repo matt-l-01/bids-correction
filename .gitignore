@@ -2,6 +2,12 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.bkp
+.DS_STORE
+.*
+
+# Database psd
+db_psd.txt
 
 # C extensions
 *.so

@@ -1,0 +1,86 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="1165" dy="2121" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="snzsaxTkBNGx6xw-ofas-163" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="snzsaxTkBNGx6xw-ofas-139" target="snzsaxTkBNGx6xw-ofas-168" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="473" y="-1030" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="snzsaxTkBNGx6xw-ofas-171" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.455;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="snzsaxTkBNGx6xw-ofas-139" target="snzsaxTkBNGx6xw-ofas-151" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="354" y="-1040" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="413" y="-1050" />
+              <mxPoint x="349" y="-1050" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="snzsaxTkBNGx6xw-ofas-139" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;ampscz_db&lt;/font&gt;" style="shape=datastore;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="383" y="-1140" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="snzsaxTkBNGx6xw-ofas-151" value="&lt;font style=&quot;font-size: 11px; font-weight: normal;&quot;&gt;&lt;u&gt;qqc_web_series&lt;/u&gt;&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="299" y="-1020" width="110" height="100" as="geometry">
+            <mxRectangle x="106" y="-1010" width="100" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="goNvq8bTCpWkjDOl4j2N-4" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;&lt;i&gt;From MRI DB:&lt;/i&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;each individual series that comprises every qqc (T1, T2, etc)&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="snzsaxTkBNGx6xw-ofas-151">
+          <mxGeometry y="33" width="110" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="snzsaxTkBNGx6xw-ofas-188" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;elbow=vertical;flowAnimation=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;dashed=1;noJump=0;ignoreEdge=0;comic=0;perimeterSpacing=0;arcSize=20;jumpStyle=none;shadow=0;sourcePerimeterSpacing=0;startSize=6;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="snzsaxTkBNGx6xw-ofas-168" target="snzsaxTkBNGx6xw-ofas-179" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="snzsaxTkBNGx6xw-ofas-168" value="&lt;u style=&quot;font-size: 11px; font-weight: 400;&quot;&gt;qqc_web_qqc&lt;/u&gt;" style="swimlane;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="418" y="-1020" width="110" height="100" as="geometry">
+            <mxRectangle x="410" y="-1070" width="100" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="snzsaxTkBNGx6xw-ofas-169" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;&lt;i&gt;From MRI DB:&lt;/i&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;qqc id, session #, subject identifier&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="snzsaxTkBNGx6xw-ofas-168" vertex="1">
+          <mxGeometry y="33" width="110" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="snzsaxTkBNGx6xw-ofas-203" value="&lt;i&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;FOR EACH SERIES&lt;/font&gt;&lt;/i&gt;" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=1 1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="snzsaxTkBNGx6xw-ofas-179" target="goNvq8bTCpWkjDOl4j2N-7" edge="1">
+          <mxGeometry x="0.0105" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="411" y="-740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="snzsaxTkBNGx6xw-ofas-179" value="&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;&lt;u&gt;all_series_df&lt;/u&gt;&lt;/font&gt;&lt;/div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;List of MRI series with applicable QQC ID, subject ID, session #&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="326" y="-850" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="snzsaxTkBNGx6xw-ofas-187" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;elbow=vertical;flowAnimation=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;dashed=1;comic=0;perimeterSpacing=0;arcSize=20;jumpStyle=none;shadow=0;sourcePerimeterSpacing=0;startSize=6;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="snzsaxTkBNGx6xw-ofas-151" target="snzsaxTkBNGx6xw-ofas-179" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="149" y="-900" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="goNvq8bTCpWkjDOl4j2N-5" value="Joined" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="381" y="-900" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="goNvq8bTCpWkjDOl4j2N-10" value="YES" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="goNvq8bTCpWkjDOl4j2N-7" target="goNvq8bTCpWkjDOl4j2N-13">
+          <mxGeometry x="-0.3392" relative="1" as="geometry">
+            <mxPoint x="414" y="-570" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="goNvq8bTCpWkjDOl4j2N-14" value="NO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="goNvq8bTCpWkjDOl4j2N-7" target="goNvq8bTCpWkjDOl4j2N-7">
+          <mxGeometry x="-0.7635" relative="1" as="geometry">
+            <mxPoint x="520" y="-740" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="521" y="-690" />
+              <mxPoint x="521" y="-730" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="goNvq8bTCpWkjDOl4j2N-7" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;Marked excluded?&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="360" y="-730" width="106" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="goNvq8bTCpWkjDOl4j2N-13" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;excluded_series_df&lt;/font&gt;" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="363" y="-610" width="101" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
