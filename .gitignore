@@ -5,6 +5,8 @@ __pycache__/
 *.bkp
 .DS_STORE
 .*
+test_rawdata/
+rawdata/
 
 # Database psd
 db_psd.txt
