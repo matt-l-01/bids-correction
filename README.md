@@ -11,6 +11,23 @@ BIDS datasets often accumulate inconsistencies due to re-scans and scanner namin
 * **Updates `IntendedFor` fields** in `fmap/` JSON files to match the new paths.
 * Prevents breaking tools like **fMRIPrep**, which can crash on mismatches.
 
+## Description
+```bash
+usage: update_bids.py [-h] [--path PATH] [--log] [--rename] [--intendedfor] [--modify-in-place]
+
+AMPSCZ NDA-3 BIDS re-format tool. Please run this script in the same parent folder with your rawdata folder, or specify another path using the flags. By
+default, this script will NOT modify anything. FIRST: use the --log flag to output an xlxs files of the list of BIDS names that must be updated. Then, WITHOUT
+the --log flag, use the --rename and --intendedfor flags to copy the current files and make corrections. The --modify-in-place flag combined with the prior 2
+flags will not make any copies and modify existing files.
+
+options:
+  -h, --help         show this help message and exit
+  --path PATH        Specify a path to the folder containing subject files (optional). (default: rawdata)
+  --log              Edit file names to correct BIDS format. (default: False)
+  --rename           Edit file names to correct BIDS format. (default: False)
+  --intendedfor      Edit IntendedFor field in JSON files. (default: False)
+  --modify-in-place  Instead of copying by default, this will (!) MODIFY (!) current files. (default: False)
+```
 
 
 ## Paramaters
