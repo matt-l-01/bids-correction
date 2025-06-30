@@ -42,7 +42,7 @@ options:
 
 ## Requirements
 
-Install required dependencies via pip:
+This program was written on `Python 3.13.3`. Install required dependencies via pip:
 
 ```bash
 pip install -r requirements.txt
