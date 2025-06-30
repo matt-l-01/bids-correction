@@ -269,7 +269,7 @@ def main():
     parser.add_argument("--path", default="rawdata", required=False,
                         help="Specify a path to the folder containing subject files (optional).")
     parser.add_argument("--log", action="store_true", default=False,
-                        help="Edit file names to correct BIDS format.")
+                        help="Generate the update log for fixes to be made (MUST BE DONE FIRST).")
     parser.add_argument("--rename", action="store_true", default=False,
                         help="Edit file names to correct BIDS format.")
     parser.add_argument("--intendedfor", action="store_true", default=False,
@@ -280,7 +280,7 @@ def main():
     args = parser.parse_args()
 
     if not args.log and not args.rename and not args.intendedfor:
-        print('Action was not selected. Try running with any of the following flags: --log, --rename, --intendedfor')
+        print('At least one action must be specified. Try running with any of the following flags: --log, --rename, --intendedfor')
         exit(1)
         return
 

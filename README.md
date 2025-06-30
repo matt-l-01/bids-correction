@@ -23,7 +23,7 @@ flags will not make any copies and modify existing files.
 options:
   -h, --help         show this help message and exit
   --path PATH        Specify a path to the folder containing subject files (optional). (default: rawdata)
-  --log              Edit file names to correct BIDS format. (default: False)
+  --log              Generate the update log for fixes to be made (MUST BE DONE FIRST). (default: False)
   --rename           Edit file names to correct BIDS format. (default: False)
   --intendedfor      Edit IntendedFor field in JSON files. (default: False)
   --modify-in-place  Instead of copying by default, this will (!) MODIFY (!) current files. (default: False)
