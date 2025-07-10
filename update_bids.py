@@ -34,7 +34,7 @@ def rename_all_files(excel_path="update_log.csv", modify_in_place=False):
             print(f"Missing corresponding NIfTI file: {old_nii_path}")
 
 
-def update_dmap_intendedfor(update_log_path='update_log.xlsx', bids_root='rawdata', modify_in_place=False):
+def update_dmap_intendedfor(update_log_path='update_log.csv', bids_root='rawdata', modify_in_place=False):
     if not os.path.exists(update_log_path):
         print(f"Update log not found: {update_log_path}")
         return
