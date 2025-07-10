@@ -8,12 +8,15 @@ import re
 import pandas as pd
 
 
-def rename_all_files(excel_path="update_log.csv", modify_in_place=False):
-    if not os.path.exists(excel_path):
-        print(f"Excel log not found: {excel_path}")
-        return
+def rename_all_files(root_directory="rawdata", modify_in_place=False):
+    parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
+    csv_path = os.path.join(parent_dir, 'update_log.csv')
 
-    updates_df = pd.read_csv(excel_path)
+    if not os.path.exists(csv_path):
+        print(f"CSV log not found: {csv_path}")
+        return
+    
+    updates_df = pd.read_csv(csv_path)
 
     for _, row in updates_df.iterrows():
         old_json_path = row["before_path"]
@@ -34,13 +37,15 @@ def rename_all_files(excel_path="update_log.csv", modify_in_place=False):
             print(f"Missing corresponding NIfTI file: {old_nii_path}")
 
 
-def update_dmap_intendedfor(update_log_path='update_log.csv', bids_root='rawdata', modify_in_place=False):
-    if not os.path.exists(update_log_path):
-        print(f"Update log not found: {update_log_path}")
-        return
+def update_dmap_intendedfor(bids_root='rawdata', modify_in_place=False):
+    parent_dir = os.path.dirname(os.path.abspath(bids_root.rstrip("/")))
+    csv_path = os.path.join(parent_dir, 'update_log.csv')
 
-    # Read log
-    updates_df = pd.read_excel(update_log_path)
+    if not os.path.exists(csv_path):
+        print(f"CSV log not found: {csv_path}")
+        return
+    
+    updates_df = pd.read_csv(csv_path)
 
     # Group updates by subject
     subject_updates = defaultdict(list)
@@ -218,9 +223,10 @@ def generate_excel(root_directory="rawdata"):
     updates_df = pd.DataFrame(updates)
 
     # Save to CSV file
-    output_excel_path = 'update_log.csv'
-    updates_df.to_csv(output_excel_path, index=False)
-    print(f"\nUpdates exported to Excel at: {output_excel_path}")
+    parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
+    output_csv_path = os.path.join(parent_dir, 'update_log.csv')
+    updates_df.to_csv(output_csv_path, index=False)
+    print(f"\nUpdates exported to CSV at: {output_csv_path}")
 
     print(json.dumps(updates, indent=4))
 
@@ -296,11 +302,12 @@ def main():
         generate_excel(args.path)
 
     if args.rename:
-        rename_all_files(modify_in_place=args.modify_in_place)
-
-    if args.intendedfor:
+        rename_all_files(root_directory=args.path, modify_in_place=args.modify_in_place)
         update_dmap_intendedfor(
             bids_root=args.path, modify_in_place=args.modify_in_place)
+
+    # if args.intendedfor:
+        
 
 
 if __name__ == "__main__":
