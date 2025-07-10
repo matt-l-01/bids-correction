@@ -380,6 +380,7 @@ def main():
         generate_log(args.path)
 
     if args.fix:
+        generate_log(args.path)
         rename_all_files(root_directory=args.path, modify_in_place=args.modify_in_place)
         update_dmap_intendedfor(root_directory=args.path, modify_in_place=args.modify_in_place)
         add_opposite_intended(root_directory=args.path, modify_in_place=args.modify_in_place)
