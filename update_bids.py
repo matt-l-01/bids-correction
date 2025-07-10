@@ -256,8 +256,8 @@ def rename_file(file_path: str, new_file_name: str, modify: bool = False):
         shutil.copy2(file_path, new_path)
         print(f"Copied {file_path} > {new_path}")
 
-def add_opposite_intended():
-
+def add_opposite_intended(root_directory="rawdata", modify_in_place=False):
+    pass
 
 
 def main():
@@ -310,7 +310,7 @@ def main():
             root_directory=args.path, modify_in_place=args.modify_in_place)
 
     if args.intendedfor:
-        
+        add_opposite_intended(root_directory=args.path, modify_in_place=args.modify_in_place)
 
 
 if __name__ == "__main__":
