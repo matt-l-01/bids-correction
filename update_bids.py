@@ -37,8 +37,8 @@ def rename_all_files(root_directory="rawdata", modify_in_place=False):
             print(f"Missing corresponding NIfTI file: {old_nii_path}")
 
 
-def update_dmap_intendedfor(bids_root='rawdata', modify_in_place=False):
-    parent_dir = os.path.dirname(os.path.abspath(bids_root.rstrip("/")))
+def update_dmap_intendedfor(root_directory='rawdata', modify_in_place=False):
+    parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
     csv_path = os.path.join(parent_dir, 'update_log.csv')
 
     if not os.path.exists(csv_path):
@@ -51,9 +51,9 @@ def update_dmap_intendedfor(bids_root='rawdata', modify_in_place=False):
     subject_updates = defaultdict(list)
     for _, row in updates_df.iterrows():
         before_rel = os.path.relpath(row['before_path'].replace(
-            '.json', '.nii.gz'), start=bids_root)
+            '.json', '.nii.gz'), start=root_directory)
         after_rel = os.path.relpath(row['after_path'].replace(
-            '.json', '.nii.gz'), start=bids_root)
+            '.json', '.nii.gz'), start=root_directory)
 
         # Extract subject
         subject = row['subject']
@@ -61,8 +61,8 @@ def update_dmap_intendedfor(bids_root='rawdata', modify_in_place=False):
         subject_updates[(subject, session)].append((before_rel, after_rel))
 
     for sub_ses, changes in subject_updates.items():
-        subject_dir = os.path.join(bids_root, sub_ses[0])
-        fmap_dir = os.path.join(bids_root, sub_ses[0], sub_ses[1], 'fmap')
+        subject_dir = os.path.join(root_directory, sub_ses[0])
+        fmap_dir = os.path.join(root_directory, sub_ses[0], sub_ses[1], 'fmap')
 
         if not os.path.exists(fmap_dir):
             continue
@@ -256,6 +256,9 @@ def rename_file(file_path: str, new_file_name: str, modify: bool = False):
         shutil.copy2(file_path, new_path)
         print(f"Copied {file_path} > {new_path}")
 
+def add_opposite_intended():
+
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -279,7 +282,7 @@ def main():
     parser.add_argument("--rename", action="store_true", default=False,
                         help="Edit file names to correct BIDS format.")
     parser.add_argument("--intendedfor", action="store_true", default=False,
-                        help="Edit IntendedFor field in JSON files.")
+                        help="Edit IntendedFor field in JSON fmaps.")
     parser.add_argument("--modify-in-place", action="store_true", default=False,
                         help="Instead of copying by default, this will (!) MODIFY (!) current files.")
 
@@ -304,9 +307,9 @@ def main():
     if args.rename:
         rename_all_files(root_directory=args.path, modify_in_place=args.modify_in_place)
         update_dmap_intendedfor(
-            bids_root=args.path, modify_in_place=args.modify_in_place)
+            root_directory=args.path, modify_in_place=args.modify_in_place)
 
-    # if args.intendedfor:
+    if args.intendedfor:
         
 
 
