@@ -13,7 +13,8 @@ def rename_all_files(root_directory="rawdata", modify_in_place=False):
     csv_path = os.path.join(parent_dir, 'update_log.csv')
 
     if not os.path.exists(csv_path):
-        print(f"CSV log not found: {csv_path}")
+        print(f"Update log not found: {csv_path}")
+        exit(1)
         return
     
     updates_df = pd.read_csv(csv_path)
@@ -42,7 +43,8 @@ def update_dmap_intendedfor(root_directory='rawdata', modify_in_place=False):
     csv_path = os.path.join(parent_dir, 'update_log.csv')
 
     if not os.path.exists(csv_path):
-        print(f"CSV log not found: {csv_path}")
+        print(f"Update log not found: {csv_path}")
+        exit(1)
         return
     
     updates_df = pd.read_csv(csv_path)
@@ -104,8 +106,7 @@ def update_dmap_intendedfor(root_directory='rawdata', modify_in_place=False):
                             # Place copy in 'changes' subdir within fmap_dir
                             changes_dir = os.path.join(fmap_dir, "changes")
                             os.makedirs(changes_dir, exist_ok=True)
-                            out_path = os.path.join(changes_dir, os.path.basename(
-                                json_path).replace('.json', '_copy.json'))
+                            out_path = os.path.join(changes_dir, os.path.basename(json_path))
 
                         with open(out_path, 'w', encoding='utf-8') as f:
                             json.dump(data, f, indent=2)
@@ -155,7 +156,7 @@ def read_all_json_by_session(root_dir):
     return data_by_session
 
 
-def generate_excel(root_directory="rawdata"):
+def generate_log(root_directory="rawdata"):
     all_data = read_all_json_by_session(root_directory)
     updates = []
 
@@ -226,7 +227,7 @@ def generate_excel(root_directory="rawdata"):
     parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
     output_csv_path = os.path.join(parent_dir, 'update_log.csv')
     updates_df.to_csv(output_csv_path, index=False)
-    print(f"\nUpdates exported to CSV at: {output_csv_path}")
+    print(f"\nUpdates exported to log at: {output_csv_path}")
 
     print(json.dumps(updates, indent=4))
 
@@ -249,15 +250,91 @@ def rename_file(file_path: str, new_file_name: str, modify: bool = False):
         base, ext = os.path.splitext(new_file_name)
         if ext == ".gz":  # handle .nii.gz
             base2, ext2 = os.path.splitext(base)
-            new_file_name = f"{base2}_new{ext2}{ext}"
+            new_file_name = f"{base2}{ext2}{ext}"
         else:
-            new_file_name = f"{base}_new{ext}"
+            new_file_name = f"{base}{ext}"
         new_path = os.path.join(changes_dir, new_file_name)
         shutil.copy2(file_path, new_path)
         print(f"Copied {file_path} > {new_path}")
 
 def add_opposite_intended(root_directory="rawdata", modify_in_place=False):
-    pass
+    def modify_fmap(path):
+        # Check for AP/PA and rename to the opposite
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+
+            intended_for = data.get('IntendedFor', [])
+
+            if not isinstance(intended_for, list):
+                print('ERROR: fmap_json does not have intendedFor at:', path)
+                return
+
+            new_intended = []
+            for entry in intended_for:
+                if '_dwi.' in entry:
+                    continue
+
+                new_intended.append(entry)
+
+                if '-AP_' in entry:
+                    new_entry = entry.replace('-AP_', '-PA_')
+                    new_intended.append(new_entry)
+
+                if '-PA_' in entry:
+                    new_entry = entry.replace('-PA_', '-AP_')
+                    new_intended.append(new_entry)
+
+            # if len(new_intended) > 0:
+            data['IntendedFor'] = new_intended
+
+            if modify_in_place:
+                out_path = path
+            else:
+                # Place copy in 'changes' subdir within fmap_dir
+                changes_dir = os.path.join(fmap_dir, "changes")
+                os.makedirs(changes_dir, exist_ok=True)
+                out_path = os.path.join(changes_dir, os.path.basename(path))
+
+            with open(out_path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2)
+
+        except Exception as e:
+                    print(f"Error processing {path}: {e}")
+
+
+
+    for sub in os.listdir(root_directory):
+        sub_path = os.path.join(root_directory, sub)
+        if not os.path.isdir(sub_path):
+            continue
+
+        for ses in os.listdir(sub_path):
+            fmap_dir = os.path.join(root_directory, sub, ses, 'fmap')
+
+            if not os.path.exists(fmap_dir):
+                print('ERROR: fmap does not exist at', fmap_dir)
+                continue
+
+            changed_fmaps = []
+            changes_dir = os.path.join(fmap_dir, 'changes')
+            if os.path.exists(changes_dir):
+                for fmap_chg in os.listdir(changes_dir):
+                    changed_fmaps.append(fmap_chg)
+                    json_path = os.path.join(changes_dir, fmap_chg)
+
+                    modify_fmap(json_path)
+
+            for fmap in os.listdir(fmap_dir):
+                if not fmap.endswith('json'):
+                    continue
+                
+                json_path = os.path.join(fmap_dir, fmap)
+
+                if os.path.basename(json_path) in changed_fmaps:
+                    continue
+
+                modify_fmap(json_path)
 
 
 def main():
@@ -279,16 +356,14 @@ def main():
                         help="Specify a path to the folder containing subject files (optional).")
     parser.add_argument("--log", action="store_true", default=False,
                         help="Generate the update log for fixes to be made (MUST BE DONE FIRST).")
-    parser.add_argument("--rename", action="store_true", default=False,
-                        help="Edit file names to correct BIDS format.")
-    parser.add_argument("--intendedfor", action="store_true", default=False,
-                        help="Edit IntendedFor field in JSON fmaps.")
+    parser.add_argument("--fix", action="store_true", default=False,
+                        help="Run the appropriate scripts to fix the run numbers and the intended for list.")
     parser.add_argument("--modify-in-place", action="store_true", default=False,
                         help="Instead of copying by default, this will (!) MODIFY (!) current files.")
 
     args = parser.parse_args()
 
-    if not args.log and not args.rename and not args.intendedfor:
+    if not args.log and not args.fix:
         print('At least one action must be specified. Try running with any of the following flags: --log, --rename, --intendedfor')
         exit(1)
         return
@@ -302,14 +377,11 @@ def main():
             return
 
     if args.log:
-        generate_excel(args.path)
+        generate_log(args.path)
 
-    if args.rename:
+    if args.fix:
         rename_all_files(root_directory=args.path, modify_in_place=args.modify_in_place)
-        update_dmap_intendedfor(
-            root_directory=args.path, modify_in_place=args.modify_in_place)
-
-    if args.intendedfor:
+        update_dmap_intendedfor(root_directory=args.path, modify_in_place=args.modify_in_place)
         add_opposite_intended(root_directory=args.path, modify_in_place=args.modify_in_place)
 
 
