@@ -8,6 +8,7 @@ __pycache__/
 test_rawdata/
 rawdata/
 *.xlsx
+*.csv
 
 # Database psd
 db_psd.txt

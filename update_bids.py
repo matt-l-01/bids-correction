@@ -8,12 +8,12 @@ import re
 import pandas as pd
 
 
-def rename_all_files(excel_path="update_log.xlsx", modify_in_place=False):
+def rename_all_files(excel_path="update_log.csv", modify_in_place=False):
     if not os.path.exists(excel_path):
         print(f"Excel log not found: {excel_path}")
         return
 
-    updates_df = pd.read_excel(excel_path)
+    updates_df = pd.read_csv(excel_path)
 
     for _, row in updates_df.iterrows():
         old_json_path = row["before_path"]
@@ -217,9 +217,9 @@ def generate_excel(root_directory="rawdata"):
 
     updates_df = pd.DataFrame(updates)
 
-    # Save to Excel file
-    output_excel_path = 'update_log.xlsx'
-    updates_df.to_excel(output_excel_path, index=False)
+    # Save to CSV file
+    output_excel_path = 'update_log.csv'
+    updates_df.to_csv(output_excel_path, index=False)
     print(f"\nUpdates exported to Excel at: {output_excel_path}")
 
     print(json.dumps(updates, indent=4))
