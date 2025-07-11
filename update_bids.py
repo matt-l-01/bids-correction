@@ -200,7 +200,8 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
         updates_df = pd.read_csv(csv_path)
     except pd.errors.EmptyDataError:
         print(f"Update log is empty: {csv_path}")
-        updates_df = pd.DataFrame()
+        updates_df = pd.DataFrame(columns=[
+                                  'subject', 'session', 'series_desc', 'before_run', 'after_run', 'before_path', 'after_path'])
 
     def modify_fmap(json_path, new_intended):
         '''
