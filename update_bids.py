@@ -364,7 +364,7 @@ def main():
     args = parser.parse_args()
 
     if not args.log and not args.fix:
-        print('At least one action must be specified. Try running with any of the following flags: --log, --rename, --intendedfor')
+        print('At least one action must be specified. Try running with any of the following flags: --log or --fix')
         exit(1)
         return
 
