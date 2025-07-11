@@ -17,7 +17,11 @@ def rename_run_num(root_directory="rawdata", modify_in_place=False):
         exit(1)
         return
 
-    updates_df = pd.read_csv(csv_path)
+    try:
+        updates_df = pd.read_csv(csv_path)
+    except pd.errors.EmptyDataError:
+        print(f"Update log is empty: {csv_path}")
+        return
 
     for _, row in updates_df.iterrows():
         old_json_path = row["before_path"]
@@ -36,84 +40,6 @@ def rename_run_num(root_directory="rawdata", modify_in_place=False):
                 new_nii_path), modify=modify_in_place)
         else:
             print(f"Missing corresponding NIfTI file: {old_nii_path}")
-
-
-def update_dmap_intendedfor(root_directory='rawdata', modify_in_place=False):
-    parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
-    csv_path = os.path.join(parent_dir, 'update_log.csv')
-
-    if not os.path.exists(csv_path):
-        print(f"Update log not found: {csv_path}")
-        exit(1)
-        return
-
-    updates_df = pd.read_csv(csv_path)
-
-    # Group updates by subject
-    subject_updates = defaultdict(list)
-    for _, row in updates_df.iterrows():
-        before_rel = os.path.relpath(row['before_path'].replace(
-            '.json', '.nii.gz'), start=root_directory)
-        after_rel = os.path.relpath(row['after_path'].replace(
-            '.json', '.nii.gz'), start=root_directory)
-
-        # Extract subject
-        subject = row['subject']
-        session = row['session']
-        subject_updates[(subject, session)].append((before_rel, after_rel))
-
-    for sub_ses, changes in subject_updates.items():
-        subject_dir = os.path.join(root_directory, sub_ses[0])
-        fmap_dir = os.path.join(root_directory, sub_ses[0], sub_ses[1], 'fmap')
-
-        if not os.path.exists(fmap_dir):
-            continue
-
-        for fname in os.listdir(fmap_dir):
-            if fname.endswith('.json'):
-                json_path = os.path.join(fmap_dir, fname)
-
-                try:
-                    with open(json_path, 'r', encoding='utf-8') as f:
-                        data = json.load(f)
-
-                    intended_for = data.get('IntendedFor', [])
-                    if not isinstance(intended_for, list):
-                        continue
-
-                    updated = False
-                    new_intended_for = []
-                    for entry in intended_for:
-                        clean_entry = entry.replace('bids::', '')
-                        new_entry = clean_entry
-
-                        for old_rel, new_rel in changes:
-                            if clean_entry == old_rel:
-                                print(
-                                    f"[JSON] Updating {fname}: {clean_entry} > {new_rel}")
-                                new_entry = new_rel
-                                updated = True
-                                break  # Avoid double replacements
-
-                        new_intended_for.append(new_entry)
-
-                    if updated:
-                        data['IntendedFor'] = new_intended_for
-
-                        if modify_in_place:
-                            out_path = json_path
-                        else:
-                            # Place copy in 'changes' subdir within fmap_dir
-                            changes_dir = os.path.join(fmap_dir, "changes")
-                            os.makedirs(changes_dir, exist_ok=True)
-                            out_path = os.path.join(
-                                changes_dir, os.path.basename(json_path))
-
-                        with open(out_path, 'w', encoding='utf-8') as f:
-                            json.dump(data, f, indent=2)
-
-                except Exception as e:
-                    print(f"Error processing {json_path}: {e}")
 
 
 def pull_series_info(root_dir):
@@ -270,7 +196,11 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
         exit(1)
         return
 
-    updates_df = pd.read_csv(csv_path)
+    try:
+        updates_df = pd.read_csv(csv_path)
+    except pd.errors.EmptyDataError:
+        print(f"Update log is empty: {csv_path}")
+        updates_df = pd.DataFrame()
 
     def modify_fmap(json_path, new_intended):
         '''
