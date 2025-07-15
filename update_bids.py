@@ -341,6 +341,8 @@ def main():
                         help="Run the appropriate scripts to fix the run numbers and the intended for list.")
     parser.add_argument("--modify-in-place", action="store_true", default=False,
                         help="Instead of copying by default, this will (!) MODIFY (!) current files.")
+    parser.add_argument("--skip-log", action="store_true", default=False,
+                        help="This will not generate the log by default (useful when running a fix on large set)")
 
     args = parser.parse_args()
 
@@ -363,7 +365,8 @@ def main():
         generate_log(all_data=all_data, root_directory=args.path)
 
     if args.fix:
-        generate_log(all_data=all_data, root_directory=args.path)
+        if not args.skip_log:
+            generate_log(all_data=all_data, root_directory=args.path)
         rename_run_num(root_directory=args.path,
                        modify_in_place=args.modify_in_place)
         construct_intendedfor(
