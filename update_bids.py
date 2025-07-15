@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from collections import defaultdict
 import shutil
 import os
@@ -6,17 +7,6 @@ import json
 import argparse
 import re
 import pandas as pd
-from concurrent.futures import ThreadPoolExecutor, as_completed
-
-
-def read_json_file(file_path):
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            return (file_path, data)
-    except Exception as e:
-        print(f"Failed to read {file_path}: {e}")
-        return None
 
 
 def rename_run_num(root_directory="rawdata", modify_in_place=False):
@@ -53,51 +43,61 @@ def rename_run_num(root_directory="rawdata", modify_in_place=False):
             print(f"Missing corresponding NIfTI file: {old_nii_path}")
 
 
+def read_json_file(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            json_data = json.load(f)
+            return (file_path, json_data)
+    except Exception as e:
+        print(f"Failed to read {file_path}: {e}")
+        return None
+
+
 def pull_series_info(root_dir):
     data_by_session = {}
-    json_paths_by_session = defaultdict(list)
+    tasks = []
 
-    # Step 1: Collect all JSON file paths grouped by (subject, session)
-    for subject in os.listdir(root_dir):
-        subject_path = os.path.join(root_dir, subject)
-        if not os.path.isdir(subject_path):
-            continue
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        futures = {}  # maps future -> (subject, session)
 
-        for session in os.listdir(subject_path):
-            session_path = os.path.join(subject_path, session)
-            if not os.path.isdir(session_path):
+        for subject in os.listdir(root_dir):
+            subject_path = os.path.join(root_dir, subject)
+            if not os.path.isdir(subject_path):
                 continue
 
-            session_key = (subject, session)
-
-            for subfolder in os.listdir(session_path):
-                subfolder_path = os.path.join(session_path, subfolder)
-                if not os.path.isdir(subfolder_path):
+            for session in os.listdir(subject_path):
+                session_path = os.path.join(subject_path, session)
+                if not os.path.isdir(session_path):
                     continue
 
-                for file_name in os.listdir(subfolder_path):
-                    if file_name.endswith(".json"):
-                        file_path = os.path.join(subfolder_path, file_name)
-                        json_paths_by_session[session_key].append(file_path)
+                session_key = (subject, session)
+                json_data_list = []
 
-    # Step 2: Use multithreading to load JSON data
-    with ThreadPoolExecutor(max_workers=16) as executor:
-        future_to_key = {}
-        for session_key, paths in json_paths_by_session.items():
-            for path in paths:
-                future = executor.submit(read_json_file, path)
-                future_to_key[future] = session_key
+                for subfolder in os.listdir(session_path):
+                    subfolder_path = os.path.join(session_path, subfolder)
+                    if not os.path.isdir(subfolder_path):
+                        continue
 
-        for future in as_completed(future_to_key):
-            session_key = future_to_key[future]
+                    for file_name in os.listdir(subfolder_path):
+                        if file_name.endswith(".json"):
+                            file_path = os.path.join(subfolder_path, file_name)
+                            future = executor.submit(read_json_file, file_path)
+                            futures[future] = session_key
+
+        # Collect results and group them by session
+        session_data = defaultdict(list)
+        for future in as_completed(futures):
             result = future.result()
             if result:
-                data_by_session.setdefault(session_key, []).append(result)
+                file_path, json_data = result
+                session_key = futures[future]
+                session_data[session_key].append((file_path, json_data))
 
-    # Step 3: Sort by SeriesNumber
-    for session_key in data_by_session:
-        data_by_session[session_key].sort(
-            key=lambda x: x[1].get("SeriesNumber"))
+    # Sort series within each session by SeriesNumber
+    for session_key, file_json_list in session_data.items():
+        sorted_list = sorted(
+            file_json_list, key=lambda x: x[1].get("SeriesNumber", 0))
+        data_by_session[session_key] = sorted_list
 
     return data_by_session
 
