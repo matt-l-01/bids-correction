@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from collections import defaultdict
 import shutil
 import os
@@ -8,7 +9,7 @@ import re
 import pandas as pd
 
 
-def rename_all_files(root_directory="rawdata", modify_in_place=False):
+def rename_run_num(root_directory="rawdata", modify_in_place=False):
     parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
     csv_path = os.path.join(parent_dir, 'update_log.csv')
 
@@ -16,8 +17,12 @@ def rename_all_files(root_directory="rawdata", modify_in_place=False):
         print(f"Update log not found: {csv_path}")
         exit(1)
         return
-    
-    updates_df = pd.read_csv(csv_path)
+
+    try:
+        updates_df = pd.read_csv(csv_path)
+    except pd.errors.EmptyDataError:
+        print(f"Update log is empty: {csv_path}")
+        return
 
     for _, row in updates_df.iterrows():
         old_json_path = row["before_path"]
@@ -38,134 +43,69 @@ def rename_all_files(root_directory="rawdata", modify_in_place=False):
             print(f"Missing corresponding NIfTI file: {old_nii_path}")
 
 
-def update_dmap_intendedfor(root_directory='rawdata', modify_in_place=False):
-    parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
-    csv_path = os.path.join(parent_dir, 'update_log.csv')
-
-    if not os.path.exists(csv_path):
-        print(f"Update log not found: {csv_path}")
-        exit(1)
-        return
-    
-    updates_df = pd.read_csv(csv_path)
-
-    # Group updates by subject
-    subject_updates = defaultdict(list)
-    for _, row in updates_df.iterrows():
-        before_rel = os.path.relpath(row['before_path'].replace(
-            '.json', '.nii.gz'), start=root_directory)
-        after_rel = os.path.relpath(row['after_path'].replace(
-            '.json', '.nii.gz'), start=root_directory)
-
-        # Extract subject
-        subject = row['subject']
-        session = row['session']
-        subject_updates[(subject, session)].append((before_rel, after_rel))
-
-    for sub_ses, changes in subject_updates.items():
-        subject_dir = os.path.join(root_directory, sub_ses[0])
-        fmap_dir = os.path.join(root_directory, sub_ses[0], sub_ses[1], 'fmap')
-
-        if not os.path.exists(fmap_dir):
-            continue
-
-        for fname in os.listdir(fmap_dir):
-            if fname.endswith('.json'):
-                json_path = os.path.join(fmap_dir, fname)
-
-                try:
-                    with open(json_path, 'r', encoding='utf-8') as f:
-                        data = json.load(f)
-
-                    intended_for = data.get('IntendedFor', [])
-                    if not isinstance(intended_for, list):
-                        continue
-
-                    updated = False
-                    new_intended_for = []
-                    for entry in intended_for:
-                        clean_entry = entry.replace('bids::', '')
-                        new_entry = clean_entry
-
-                        for old_rel, new_rel in changes:
-                            if clean_entry == old_rel:
-                                print(
-                                    f"[JSON] Updating {fname}: {clean_entry} > {new_rel}")
-                                new_entry = new_rel
-                                updated = True
-                                break  # Avoid double replacements
-
-                        new_intended_for.append(new_entry)
-
-                    if updated:
-                        data['IntendedFor'] = new_intended_for
-
-                        if modify_in_place:
-                            out_path = json_path
-                        else:
-                            # Place copy in 'changes' subdir within fmap_dir
-                            changes_dir = os.path.join(fmap_dir, "changes")
-                            os.makedirs(changes_dir, exist_ok=True)
-                            out_path = os.path.join(changes_dir, os.path.basename(json_path))
-
-                        with open(out_path, 'w', encoding='utf-8') as f:
-                            json.dump(data, f, indent=2)
-
-                except Exception as e:
-                    print(f"Error processing {json_path}: {e}")
+def read_json_file(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            json_data = json.load(f)
+            return (file_path, json_data)
+    except Exception as e:
+        print(f"Failed to read {file_path}: {e}")
+        return None
 
 
-def read_all_json_by_session(root_dir):
+def pull_series_info(root_dir):
     data_by_session = {}
+    tasks = []
 
-    # Iterate through all subject folders
-    for subject in os.listdir(root_dir):
-        subject_path = os.path.join(root_dir, subject)
-        if not os.path.isdir(subject_path):
-            continue
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        futures = {}  # maps future -> (subject, session)
 
-        # Iterate through session folders in each subject folder
-        for session in os.listdir(subject_path):
-            session_path = os.path.join(subject_path, session)
-            if not os.path.isdir(session_path):
+        for subject in os.listdir(root_dir):
+            subject_path = os.path.join(root_dir, subject)
+            if not os.path.isdir(subject_path):
                 continue
 
-            session_key = (subject, session)
-            json_data_list = []
-
-            # Iterate through the 4 folders inside each session
-            for subfolder in os.listdir(session_path):
-                subfolder_path = os.path.join(session_path, subfolder)
-                if not os.path.isdir(subfolder_path):
+            for session in os.listdir(subject_path):
+                session_path = os.path.join(subject_path, session)
+                if not os.path.isdir(session_path):
                     continue
 
-                # Read all JSON files in the current subfolder
-                for file_name in os.listdir(subfolder_path):
-                    if file_name.endswith(".json"):
-                        file_path = os.path.join(subfolder_path, file_name)
-                        try:
-                            with open(file_path, 'r', encoding='utf-8') as f:
-                                json_data = json.load(f)
-                                json_data_list.append((file_path, json_data))
-                        except Exception as e:
-                            print(f"Failed to read {file_path}: {e}")
+                session_key = (subject, session)
+                json_data_list = []
 
-            # Store all json data in the dictionary
-            data_by_session[session_key] = json_data_list
+                for subfolder in os.listdir(session_path):
+                    subfolder_path = os.path.join(session_path, subfolder)
+                    if not os.path.isdir(subfolder_path):
+                        continue
+
+                    for file_name in os.listdir(subfolder_path):
+                        if file_name.endswith(".json"):
+                            file_path = os.path.join(subfolder_path, file_name)
+                            future = executor.submit(read_json_file, file_path)
+                            futures[future] = session_key
+
+        # Collect results and group them by session
+        session_data = defaultdict(list)
+        for future in as_completed(futures):
+            result = future.result()
+            if result:
+                file_path, json_data = result
+                session_key = futures[future]
+                session_data[session_key].append((file_path, json_data))
+
+    # Sort series within each session by SeriesNumber
+    for session_key, file_json_list in session_data.items():
+        sorted_list = sorted(
+            file_json_list, key=lambda x: x[1].get("SeriesNumber", 0))
+        data_by_session[session_key] = sorted_list
 
     return data_by_session
 
 
-def generate_log(root_directory="rawdata"):
-    all_data = read_all_json_by_session(root_directory)
+def generate_log(all_data, root_directory="rawdata"):
     updates = []
 
     for sub_ses, series_lst in all_data.items():
-        # Sort by series number
-        series_lst = sorted(series_lst, key=lambda x: x[1].get("SeriesNumber"))
-
-        print('subject_session : series number : before run # : after run # : series description')
-
         session_run_count = {'DistortionMap_AP': 0, 'DistortionMap_PA': 0, 'T1w': 0, 'T2w': 0,
                              'dMRI_b0_AP_SBRef': 0, 'dMRI_b0_AP': 0,
                              'dMRI_PA_SBRef': 0, 'dMRI_PA': 0,
@@ -257,84 +197,141 @@ def rename_file(file_path: str, new_file_name: str, modify: bool = False):
         shutil.copy2(file_path, new_path)
         print(f"Copied {file_path} > {new_path}")
 
-def add_opposite_intended(root_directory="rawdata", modify_in_place=False):
-    def modify_fmap(path):
-        # Check for AP/PA and rename to the opposite
+
+def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=False):
+    '''
+    Constructs the intended for from scratch, moving by series number.
+    '''
+
+    # Get update log
+    parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
+    csv_path = os.path.join(parent_dir, 'update_log.csv')
+
+    if not os.path.exists(csv_path):
+        print(f"Update log not found: {csv_path}")
+        exit(1)
+        return
+
+    try:
+        updates_df = pd.read_csv(csv_path)
+    except pd.errors.EmptyDataError:
+        print(f"Update log is empty: {csv_path}")
+        updates_df = pd.DataFrame(columns=[
+                                  'subject', 'session', 'series_desc', 'before_run', 'after_run', 'before_path', 'after_path'])
+
+    def modify_fmap(json_path, new_intended):
+        '''
+        Modify a single fmap intended for
+        '''
         try:
-            with open(path, 'r', encoding='utf-8') as f:
+            with open(json_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
 
             intended_for = data.get('IntendedFor', [])
 
             if not isinstance(intended_for, list):
-                print('ERROR: fmap_json does not have intendedFor at:', path)
+                print('ERROR: fmap_json does not have intendedFor at:', json_path)
                 return
 
-            new_intended = []
-            for entry in intended_for:
-                if '_dwi.' in entry:
-                    continue
-
-                new_intended.append(entry)
-
-                if '-AP_' in entry:
-                    new_entry = entry.replace('-AP_', '-PA_')
-                    new_intended.append(new_entry)
-
-                if '-PA_' in entry:
-                    new_entry = entry.replace('-PA_', '-AP_')
-                    new_intended.append(new_entry)
-
-            # if len(new_intended) > 0:
             data['IntendedFor'] = new_intended
 
             if modify_in_place:
-                out_path = path
+                out_path = json_path
             else:
                 # Place copy in 'changes' subdir within fmap_dir
-                changes_dir = os.path.join(fmap_dir, "changes")
+                changes_dir = os.path.join(
+                    os.path.dirname(json_path), "changes")
                 os.makedirs(changes_dir, exist_ok=True)
-                out_path = os.path.join(changes_dir, os.path.basename(path))
+                out_path = os.path.join(
+                    changes_dir, os.path.basename(json_path))
 
             with open(out_path, 'w', encoding='utf-8') as f:
                 json.dump(data, f, indent=2)
 
         except Exception as e:
-                    print(f"Error processing {path}: {e}")
+            print(f"Error processing {json_path}: {e}")
 
+    '''
+    Loop through all subjects and construct intended for based on series received after
+    the current fmaps but before the next pair of fmaps.
+    '''
+    for sub_ses, series_lst in all_data.items():
 
+        # Stores the fmap pair in this session. Key is the pair/run number (1st pair, 2nd pair, etc.)
+        # Val is a 3-tuple. First 2 entries are the series (path, data), 3rd entry is the range of series number
+        # they apply to (series after them but not past the next pair of maps)
+        # 1 -> ((path, data), (path, data), [range eg. 4-2])
+        fmap_pairs = {}
+        fmap_list = []
+        # Collect all fmap (AP/PA) in order
+        for s_path, s_data in series_lst:
+            if s_data.get('SeriesDescription') in ['DistortionMap_AP', 'DistortionMap_PA']:
+                fmap_list.append((s_path, s_data))
 
-    for sub in os.listdir(root_directory):
-        sub_path = os.path.join(root_directory, sub)
-        if not os.path.isdir(sub_path):
-            continue
+        # Pair up AP/PA fmaps (assuming they alternate) into fmap_pairs
+        fmap_pair_count = 0
+        i = 0
+        while i < len(fmap_list) - 1:
+            ap = fmap_list[i]
+            pa = fmap_list[i + 1]
+            if ap[1].get('SeriesDescription') == 'DistortionMap_AP' and pa[1].get('SeriesDescription') == 'DistortionMap_PA':
+                fmap_pair_count += 1
+                fmap_pairs[fmap_pair_count] = (
+                    ap, pa, None)  # range to be filled below
+                i += 2
+            else:
+                i += 1  # skip to next if not a valid pair
 
-        for ses in os.listdir(sub_path):
-            fmap_dir = os.path.join(root_directory, sub, ses, 'fmap')
+        # Determine the range of series numbers each pair applies to
+        fmap_pair_keys = sorted(fmap_pairs.keys())
+        for i, key in enumerate(fmap_pair_keys):
+            ap, pa, _ = fmap_pairs[key]  # get the pair
 
-            if not os.path.exists(fmap_dir):
-                print('ERROR: fmap does not exist at', fmap_dir)
-                continue
+            # Starting series # being 1 more than the fmaps
+            start_series = max(ap[1].get('SeriesNumber', 0),
+                               pa[1].get('SeriesNumber', 0))
+            start_series += 1
 
-            changed_fmaps = []
-            changes_dir = os.path.join(fmap_dir, 'changes')
-            if os.path.exists(changes_dir):
-                for fmap_chg in os.listdir(changes_dir):
-                    changed_fmaps.append(fmap_chg)
-                    json_path = os.path.join(changes_dir, fmap_chg)
+            # Find next pair (if not to the end) and set upper range
+            if i + 1 < len(fmap_pair_keys):
+                next_ap, next_pa, _ = fmap_pairs[fmap_pair_keys[i + 1]]
+                end_series = min(next_ap[1].get(
+                    'SeriesNumber', 9999), next_pa[1].get('SeriesNumber', 9999)) - 1
+            else:
+                end_series = 9999  # until end
+            fmap_pairs[key] = (ap, pa, (start_series, end_series))
 
-                    modify_fmap(json_path)
+        # For each fmap pair, find all series in the range and update IntendedFor
+        for key, (ap, pa, range) in fmap_pairs.items():
+            intended_for = []
+            for s_path, s_data in series_lst:
+                s_num = s_data.get('SeriesNumber', 0)
+                s_desc = s_data.get('SeriesDescription', '')
 
-            for fmap in os.listdir(fmap_dir):
-                if not fmap.endswith('json'):
-                    continue
-                
-                json_path = os.path.join(fmap_dir, fmap)
+                # If this series is within range and not an fmap, dwi, or SBRef
+                if (
+                    range[0] <= s_num <= range[1]
+                    and not 'DistortionMap' in s_desc
+                    and not 'dMRI' in s_desc
+                    and not 'SBRef' in s_desc
+                ):
+                    rel_path = os.path.relpath(s_path, start=root_directory)
 
-                if os.path.basename(json_path) in changed_fmaps:
-                    continue
+                    # Check update log and replace with run-X updated path if present
+                    # Use only relative path for comparison
+                    update_match = updates_df[updates_df['before_path'].apply(
+                        lambda p: os.path.relpath(p, start=root_directory) == rel_path)]
 
-                modify_fmap(json_path)
+                    if not update_match.empty:
+                        updated_rel_path = os.path.relpath(
+                            update_match['after_path'].values[0], start=root_directory)
+                        rel_path = updated_rel_path
+
+                    rel_path = rel_path.replace('.json', '.nii.gz')
+                    intended_for.append(f'bids::{rel_path}')
+                # Update both AP and PA fmap jsons
+                modify_fmap(ap[0], intended_for)
+                modify_fmap(pa[0], intended_for)
 
 
 def main():
@@ -360,11 +357,13 @@ def main():
                         help="Run the appropriate scripts to fix the run numbers and the intended for list.")
     parser.add_argument("--modify-in-place", action="store_true", default=False,
                         help="Instead of copying by default, this will (!) MODIFY (!) current files.")
+    parser.add_argument("--skip-log", action="store_true", default=False,
+                        help="This will not generate the log by default (useful when running a fix on large set)")
 
     args = parser.parse_args()
 
     if not args.log and not args.fix:
-        print('At least one action must be specified. Try running with any of the following flags: --log, --rename, --intendedfor')
+        print('At least one action must be specified. Try running with any of the following flags: --log or --fix')
         exit(1)
         return
 
@@ -376,14 +375,18 @@ def main():
             exit(0)
             return
 
+    all_data = pull_series_info(root_dir=args.path)
+
     if args.log:
-        generate_log(args.path)
+        generate_log(all_data=all_data, root_directory=args.path)
 
     if args.fix:
-        generate_log(args.path)
-        rename_all_files(root_directory=args.path, modify_in_place=args.modify_in_place)
-        update_dmap_intendedfor(root_directory=args.path, modify_in_place=args.modify_in_place)
-        add_opposite_intended(root_directory=args.path, modify_in_place=args.modify_in_place)
+        if not args.skip_log:
+            generate_log(all_data=all_data, root_directory=args.path)
+        rename_run_num(root_directory=args.path,
+                       modify_in_place=args.modify_in_place)
+        construct_intendedfor(
+            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place)
 
 
 if __name__ == "__main__":
