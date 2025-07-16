@@ -328,8 +328,6 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
                         rel_path = updated_rel_path
 
                     rel_path = rel_path.replace('.json', '.nii.gz')
-                    print(rel_path)
-                    print(root_directory)
                     intended_for.append(f'bids::{rel_path}')
                 # Update both AP and PA fmap jsons
                 modify_fmap(ap[0], intended_for)
