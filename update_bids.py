@@ -315,19 +315,21 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
                     and not 'dMRI' in s_desc
                     and not 'SBRef' in s_desc
                 ):
-                    # Relative path from root_directory
-                    rel_path = os.path.relpath(
-                        path=s_path, start=root_directory)
+                    rel_path = os.path.relpath(s_path, start=root_directory)
 
                     # Check update log and replace with run-X updated path if present
-                    if updates_df['before_path'].str.contains(rel_path, na=False).any():
-                        rel_path = updates_df.loc[updates_df['before_path'].str.contains(
-                            f'{root_directory}/{rel_path}'), 'after_path'].values[0]
-                        rel_path = os.path.join(
-                            *rel_path.split(os.sep)[1:])  # remove rawdata
+                    # Use only relative path for comparison
+                    update_match = updates_df[updates_df['before_path'].apply(
+                        lambda p: os.path.relpath(p, start=root_directory) == rel_path)]
+
+                    if not update_match.empty:
+                        updated_rel_path = os.path.relpath(
+                            update_match['after_path'].values[0], start=root_directory)
+                        rel_path = updated_rel_path
 
                     rel_path = rel_path.replace('.json', '.nii.gz')
                     print(rel_path)
+                    print(root_directory)
                     intended_for.append(f'bids::{rel_path}')
                 # Update both AP and PA fmap jsons
                 modify_fmap(ap[0], intended_for)
