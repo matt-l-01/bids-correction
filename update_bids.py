@@ -367,7 +367,7 @@ def main():
 
     args = parser.parse_args()
 
-    if not args.log and not args.fix:
+    if not args.log and not args.fix and not args.only_intendedfor:
         print('At least one action must be specified. Try running with any of the following flags: --log or --fix')
         exit(1)
         return
@@ -386,6 +386,8 @@ def main():
         generate_log(all_data=all_data, root_directory=args.path)
 
     if args.only_intendedfor:
+        if not args.skip_log:
+            generate_log(all_data=all_data, root_directory=args.path)
         construct_intendedfor(
             all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place)
         return
