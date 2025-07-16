@@ -10,6 +10,7 @@ import pandas as pd
 
 
 def rename_run_num(root_directory="rawdata", modify_in_place=False):
+    print('Fix run numbers.')
     parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
     csv_path = os.path.join(parent_dir, 'update_log.csv')
 
@@ -54,6 +55,7 @@ def read_json_file(file_path):
 
 
 def pull_series_info(root_dir):
+    print('Pulling series info.')
     data_by_session = {}
     tasks = []
 
@@ -103,6 +105,7 @@ def pull_series_info(root_dir):
 
 
 def generate_log(all_data, root_directory="rawdata"):
+    print('Generating log.')
     updates = []
 
     for sub_ses, series_lst in all_data.items():
@@ -202,7 +205,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
     '''
     Constructs the intended for from scratch, moving by series number.
     '''
-
+    print('Constructing intendedfor.')
     # Get update log
     parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
     csv_path = os.path.join(parent_dir, 'update_log.csv')
@@ -359,6 +362,8 @@ def main():
                         help="Instead of copying by default, this will (!) MODIFY (!) current files.")
     parser.add_argument("--skip-log", action="store_true", default=False,
                         help="This will not generate the log by default (useful when running a fix on large set)")
+    parser.add_argument("--only-intendedfor", action="store_true", default=False,
+                        help="This will ONLY run the intended for functions")
 
     args = parser.parse_args()
 
@@ -379,6 +384,11 @@ def main():
 
     if args.log:
         generate_log(all_data=all_data, root_directory=args.path)
+
+    if args.only_intendedfor:
+        construct_intendedfor(
+            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place)
+        return
 
     if args.fix:
         if not args.skip_log:
