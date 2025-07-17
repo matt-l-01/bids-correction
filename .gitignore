@@ -204,3 +204,4 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 cache_subjects.txt
+cache/cache.db

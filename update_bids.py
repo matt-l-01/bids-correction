@@ -7,6 +7,9 @@ import json
 import argparse
 import re
 import pandas as pd
+import diskcache as dc
+
+cache = dc.Cache('cache')
 
 
 def rename_run_num(root_directory="rawdata", modify_in_place=False):
@@ -54,39 +57,56 @@ def read_json_file(file_path):
         return None
 
 
-def pull_series_info(root_dir):
+all_keys = set()
+
+
+def pull_series_info(root_dir, partial=False):
     print('Pulling series info.')
-    data_by_session = {}
-    tasks = []
 
     series_total = 0
     with ThreadPoolExecutor(max_workers=8) as executor:
         futures = {}  # maps future -> (subject, session)
 
-        for subject in os.listdir(root_dir):
-            subject_path = os.path.join(root_dir, subject)
-            if not os.path.isdir(subject_path):
-                continue
-
-            for session in os.listdir(subject_path):
-                session_path = os.path.join(subject_path, session)
-                if not os.path.isdir(session_path):
+        with os.scandir(root_dir) as subjects:
+            for subject_entry in subjects:
+                if not subject_entry.is_dir():
                     continue
+                subject = subject_entry.name
+                subject_path = subject_entry.path
 
-                session_key = (subject, session)
-                json_data_list = []
+                with os.scandir(subject_path) as sessions:
+                    for session_entry in sessions:
+                        if not session_entry.is_dir():
+                            continue
+                        session = session_entry.name
+                        session_path = session_entry.path
 
-                for subfolder in os.listdir(session_path):
-                    subfolder_path = os.path.join(session_path, subfolder)
-                    if not os.path.isdir(subfolder_path):
-                        continue
+                        session_key = (subject, session)
 
-                    for file_name in os.listdir(subfolder_path):
-                        if file_name.endswith(".json"):
-                            series_total += 1
-                            file_path = os.path.join(subfolder_path, file_name)
-                            future = executor.submit(read_json_file, file_path)
-                            futures[future] = session_key
+                        # Check cache before processing
+                        all_keys.add(session_key)
+
+                        cached_value = cache.get(
+                            f"{session_key[0]}/{session_key[1]}")
+                        if isinstance(cached_value, dict):
+                            print(
+                                f"Skipping cached pull {session_key}")
+                            continue
+
+                        with os.scandir(session_path) as subfolders:
+                            for subfolder_entry in subfolders:
+                                if not subfolder_entry.is_dir():
+                                    continue
+                                subfolder_path = subfolder_entry.path
+
+                                with os.scandir(subfolder_path) as files:
+                                    for file_entry in files:
+                                        if file_entry.is_file() and file_entry.name.endswith(".json"):
+                                            series_total += 1
+                                            file_path = file_entry.path
+                                            future = executor.submit(
+                                                read_json_file, file_path)
+                                            futures[future] = session_key
 
         # Collect results and group them by session
         session_data = defaultdict(list)
@@ -100,16 +120,38 @@ def pull_series_info(root_dir):
                 session_data[session_key].append((file_path, json_data))
                 percent_complete = (
                     series_complete / series_total) * 100 if series_total else 0
+                if partial:
+                    cache.set(f'{session_key[0]}/{session_key[1]}', json_data)
                 print(
                     f"({series_complete}/{series_total} : {percent_complete:.1f}%) Pulled {file_path}")
 
-    # Sort series within each session by SeriesNumber
+    session_data_final = {}
+
+    # Add all the cached data first
+    for key in all_keys:
+        key_str = f"{key[0]}/{key[1]}"
+        # Ignore keys not in cache
+        if key_str not in cache:
+            continue
+
+        cached_dict = cache.get(key_str)
+
+        if not isinstance(cached_dict, dict):
+            print('ERROR: Cached item is not a dict')
+            continue
+
+        # Sort series within each session by SeriesNumber
+        sorted_list = sorted(
+            session_data[key], key=lambda x: x[1].get("SeriesNumber", 0))
+        session_data_final[key] = sorted_list
+
     for session_key, file_json_list in session_data.items():
+        # Add the data read from this execution
         sorted_list = sorted(
             file_json_list, key=lambda x: x[1].get("SeriesNumber", 0))
-        data_by_session[session_key] = sorted_list
+        session_data_final[session_key] = sorted_list
 
-    return data_by_session
+    return session_data_final
 
 
 def generate_log(all_data, root_directory="rawdata"):
@@ -270,7 +312,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
     finished_sub_ses = set()
     if partial:
         cache_file = os.path.join(
-            parent_dir, "cache_subjects.txt")
+            parent_dir, "cache_intendedfor.txt")
         if os.path.exists(cache_file):
             with open(cache_file, "r") as f:
                 finished_sub_ses = set(line.strip()
@@ -279,10 +321,10 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
     curr_ses = 0
     for sub_ses, series_lst in all_data.items():
         # Skip if this sub_ses is already finished, but only if partial is True
+        sub_ses_str = f"IntendedFor({sub_ses[0]}/{sub_ses[1]})"
         if partial:
-            sub_ses_str = f"IntendedFor({sub_ses[0]}/{sub_ses[1]})"
             if sub_ses_str in finished_sub_ses:
-                print(f'Skipping {sub_ses}')
+                print(f'Skipping {sub_ses_str}')
                 continue
 
         # Stores the fmap pair in this session. Key is the pair/run number (1st pair, 2nd pair, etc.)
@@ -368,7 +410,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
 
         # Save finished sub_ses to a file
         if partial:
-            cache_file = os.path.join(parent_dir, "cache_subjects.txt")
+            cache_file = os.path.join(parent_dir, "cache_intendedfor.txt")
             # Ensure the file exists before appending
             with open(cache_file, "a") as f:
                 f.write(f"IntendedFor({sub_ses[0]}/{sub_ses[1]})\n")
@@ -401,7 +443,7 @@ def main():
                         help="This will not generate the log by default (useful when running a fix on large set)")
     parser.add_argument("--only-intendedfor", action="store_true", default=False,
                         help="This will ONLY run the intended for functions")
-    parser.add_argument("--partial", action="store_true", default=False,
+    parser.add_argument("--cache", action="store_true", default=False,
                         help="This will store processed subjects if the script is interrupted.")
 
     args = parser.parse_args()
@@ -419,7 +461,7 @@ def main():
             exit(0)
             return
 
-    all_data = pull_series_info(root_dir=args.path)
+    all_data = pull_series_info(root_dir=args.path, partial=args.cache)
 
     if args.log:
         generate_log(all_data=all_data, root_directory=args.path)
@@ -427,7 +469,7 @@ def main():
 
     if args.only_intendedfor:
         construct_intendedfor(
-            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place, partial=args.partial)
+            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place, partial=args.cache)
         return
 
     if args.fix:
@@ -436,7 +478,7 @@ def main():
         rename_run_num(root_directory=args.path,
                        modify_in_place=args.modify_in_place)
         construct_intendedfor(
-            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place, partial=args.partial)
+            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place, partial=args.cache)
         return
 
 
