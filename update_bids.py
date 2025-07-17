@@ -201,7 +201,7 @@ def rename_file(file_path: str, new_file_name: str, modify: bool = False):
         print(f"Copied {file_path} > {new_path}")
 
 
-def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=False):
+def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=False, partial=False):
     '''
     Constructs the intended for from scratch, moving by series number.
     '''
@@ -258,7 +258,23 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
     Loop through all subjects and construct intended for based on series received after
     the current fmaps but before the next pair of fmaps.
     '''
+    # Read cached finished sub_ses from file into a set, only if partial is True
+    finished_sub_ses = set()
+    if partial:
+        cache_file = os.path.join(
+            parent_dir, "cache_subjects.txt")
+        if os.path.exists(cache_file):
+            with open(cache_file, "r") as f:
+                finished_sub_ses = set(line.strip()
+                                       for line in f if line.strip())
+
     for sub_ses, series_lst in all_data.items():
+        # Skip if this sub_ses is already finished, but only if partial is True
+        if partial:
+            sub_ses_str = f"IntendedFor({sub_ses[0]}/{sub_ses[1]})"
+            if sub_ses_str in finished_sub_ses:
+                print(f'Skipping {sub_ses}')
+                continue
 
         # Stores the fmap pair in this session. Key is the pair/run number (1st pair, 2nd pair, etc.)
         # Val is a 3-tuple. First 2 entries are the series (path, data), 3rd entry is the range of series number
@@ -336,6 +352,12 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
                 modify_fmap(ap[0], intended_for)
                 modify_fmap(pa[0], intended_for)
         print(f"Finished processing: {sub_ses}")
+        # Save finished sub_ses to a file
+        if partial:
+            cache_file = os.path.join(parent_dir, "cache_subjects.txt")
+            # Ensure the file exists before appending
+            with open(cache_file, "a") as f:
+                f.write(f"IntendedFor({sub_ses[0]}/{sub_ses[1]})\n")
 
 
 def main():
@@ -365,6 +387,8 @@ def main():
                         help="This will not generate the log by default (useful when running a fix on large set)")
     parser.add_argument("--only-intendedfor", action="store_true", default=False,
                         help="This will ONLY run the intended for functions")
+    parser.add_argument("--partial", action="store_true", default=False,
+                        help="This will store processed subjects if the script is interrupted.")
 
     args = parser.parse_args()
 
@@ -389,7 +413,7 @@ def main():
 
     if args.only_intendedfor:
         construct_intendedfor(
-            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place)
+            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place, partial=args.partial)
         return
 
     if args.fix:
@@ -398,7 +422,7 @@ def main():
         rename_run_num(root_directory=args.path,
                        modify_in_place=args.modify_in_place)
         construct_intendedfor(
-            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place)
+            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place, partial=args.partial)
         return
 
 
