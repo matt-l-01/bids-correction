@@ -335,6 +335,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
                 # Update both AP and PA fmap jsons
                 modify_fmap(ap[0], intended_for)
                 modify_fmap(pa[0], intended_for)
+        print(f"Finished processing: {sub_ses}")
 
 
 def main():
@@ -384,10 +385,9 @@ def main():
 
     if args.log:
         generate_log(all_data=all_data, root_directory=args.path)
+        return
 
     if args.only_intendedfor:
-        if not args.skip_log:
-            generate_log(all_data=all_data, root_directory=args.path)
         construct_intendedfor(
             all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place)
         return
@@ -399,6 +399,7 @@ def main():
                        modify_in_place=args.modify_in_place)
         construct_intendedfor(
             all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place)
+        return
 
 
 if __name__ == "__main__":
