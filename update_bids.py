@@ -59,6 +59,7 @@ def pull_series_info(root_dir):
     data_by_session = {}
     tasks = []
 
+    series_total = 0
     with ThreadPoolExecutor(max_workers=8) as executor:
         futures = {}  # maps future -> (subject, session)
 
@@ -82,18 +83,25 @@ def pull_series_info(root_dir):
 
                     for file_name in os.listdir(subfolder_path):
                         if file_name.endswith(".json"):
+                            series_total += 1
                             file_path = os.path.join(subfolder_path, file_name)
                             future = executor.submit(read_json_file, file_path)
                             futures[future] = session_key
 
         # Collect results and group them by session
         session_data = defaultdict(list)
+        series_complete = 0
         for future in as_completed(futures):
             result = future.result()
             if result:
+                series_complete += 1
                 file_path, json_data = result
                 session_key = futures[future]
                 session_data[session_key].append((file_path, json_data))
+                percent_complete = (
+                    series_complete / series_total) * 100 if series_total else 0
+                print(
+                    f"({series_complete}/{series_total} : {percent_complete:.1f}%) Pulled {file_path}")
 
     # Sort series within each session by SeriesNumber
     for session_key, file_json_list in session_data.items():
@@ -267,7 +275,8 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
             with open(cache_file, "r") as f:
                 finished_sub_ses = set(line.strip()
                                        for line in f if line.strip())
-
+    total_ses = len(all_data)
+    curr_ses = 0
     for sub_ses, series_lst in all_data.items():
         # Skip if this sub_ses is already finished, but only if partial is True
         if partial:
@@ -351,7 +360,12 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
                 # Update both AP and PA fmap jsons
                 modify_fmap(ap[0], intended_for)
                 modify_fmap(pa[0], intended_for)
-        print(f"Finished processing: {sub_ses}")
+
+        curr_ses += 1
+        percent_complete = (curr_ses / total_ses) * 100 if total_ses else 0
+        print(
+            f"({curr_ses}/{total_ses} : {percent_complete:.1f}%) Finished {sub_ses_str}")
+
         # Save finished sub_ses to a file
         if partial:
             cache_file = os.path.join(parent_dir, "cache_subjects.txt")
