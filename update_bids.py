@@ -9,11 +9,11 @@ import re
 import pandas as pd
 import diskcache as dc
 
-cache = dc.Cache('cache')
+cache = {}
 
 
 def rename_run_num(root_directory="rawdata", modify_in_place=False):
-    print('Fix run numbers.')
+    print('Fixing run numbers.')
     parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
     csv_path = os.path.join(parent_dir, 'update_log.csv')
 
@@ -86,12 +86,13 @@ def pull_series_info(root_dir, partial=False):
                         # Check cache before processing
                         all_keys.add(session_key)
 
-                        cached_value = cache.get(
-                            f"{session_key[0]}/{session_key[1]}")
-                        if isinstance(cached_value, dict):
-                            print(
-                                f"Skipping cached pull {session_key}")
-                            continue
+                        if partial:
+                            cached_value = cache.get(
+                                f"{session_key[0]}/{session_key[1]}")
+                            if isinstance(cached_value, dict):
+                                print(
+                                    f"Skipping cached pull {session_key}")
+                                continue
 
                         with os.scandir(session_path) as subfolders:
                             for subfolder_entry in subfolders:
@@ -103,6 +104,9 @@ def pull_series_info(root_dir, partial=False):
                                     for file_entry in files:
                                         if file_entry.is_file() and file_entry.name.endswith(".json"):
                                             series_total += 1
+                                            if series_total % 100 == 0:
+                                                print(
+                                                    f'{series_total} files scanned.')
                                             file_path = file_entry.path
                                             future = executor.submit(
                                                 read_json_file, file_path)
@@ -308,22 +312,14 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
     Loop through all subjects and construct intended for based on series received after
     the current fmaps but before the next pair of fmaps.
     '''
-    # Read cached finished sub_ses from file into a set, only if partial is True
-    finished_sub_ses = set()
-    if partial:
-        cache_file = os.path.join(
-            parent_dir, "cache_intendedfor.txt")
-        if os.path.exists(cache_file):
-            with open(cache_file, "r") as f:
-                finished_sub_ses = set(line.strip()
-                                       for line in f if line.strip())
     total_ses = len(all_data)
     curr_ses = 0
+
     for sub_ses, series_lst in all_data.items():
         # Skip if this sub_ses is already finished, but only if partial is True
         sub_ses_str = f"IntendedFor({sub_ses[0]}/{sub_ses[1]})"
         if partial:
-            if sub_ses_str in finished_sub_ses:
+            if sub_ses_str in cache and cache.get(sub_ses_str):
                 print(f'Skipping {sub_ses_str}')
                 continue
 
@@ -399,21 +395,16 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
 
                     rel_path = rel_path.replace('.json', '.nii.gz')
                     intended_for.append(f'bids::{rel_path}')
-                # Update both AP and PA fmap jsons
-                modify_fmap(ap[0], intended_for)
-                modify_fmap(pa[0], intended_for)
+            # Update both AP and PA fmap jsons
+            modify_fmap(ap[0], intended_for)
+            modify_fmap(pa[0], intended_for)
 
         curr_ses += 1
         percent_complete = (curr_ses / total_ses) * 100 if total_ses else 0
         print(
             f"({curr_ses}/{total_ses} : {percent_complete:.1f}%) Finished {sub_ses_str}")
-
-        # Save finished sub_ses to a file
         if partial:
-            cache_file = os.path.join(parent_dir, "cache_intendedfor.txt")
-            # Ensure the file exists before appending
-            with open(cache_file, "a") as f:
-                f.write(f"IntendedFor({sub_ses[0]}/{sub_ses[1]})\n")
+            cache.set(sub_ses_str, True)
 
 
 def main():
@@ -460,6 +451,10 @@ def main():
             print("Aborting script.")
             exit(0)
             return
+
+    if args.cache:
+        global cache
+        cache = dc.Cache('cache')
 
     all_data = pull_series_info(root_dir=args.path, partial=args.cache)
 
