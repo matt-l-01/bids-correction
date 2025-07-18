@@ -269,8 +269,8 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
 
     try:
         updates_df = pd.read_csv(csv_path)
-    except pd.errors.EmptyDataError:
-        print(f"Update log is empty: {csv_path}")
+    except Exception:
+        print(f"Error reading log (empty or not present): {csv_path}")
         updates_df = pd.DataFrame(columns=[
                                   'subject', 'session', 'series_desc', 'before_run', 'after_run', 'before_path', 'after_path'])
 
