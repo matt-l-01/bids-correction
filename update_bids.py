@@ -266,8 +266,6 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
 
     if not os.path.exists(csv_path):
         print(f"Update log not found: {csv_path}")
-        exit(1)
-        return
 
     try:
         updates_df = pd.read_csv(csv_path)
