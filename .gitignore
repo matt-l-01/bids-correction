@@ -10,6 +10,7 @@ rawdata/
 rawdata_bkup/
 *.xlsx
 *.csv
+cache/
 
 # Database psd
 db_psd.txt
