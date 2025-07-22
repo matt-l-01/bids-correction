@@ -68,8 +68,8 @@ options:
   --log               Generate just the update log for run-# changes (for testing) (default: False)
   --skip-log          This will not generate the log by default (only useful if log already generated) (default: False)
   --only-intendedfor  This will ONLY run the intended-for fix functions (default: False)
+  --no-links          This will NOT create hard links for run-# fixes and copy full files. (default: False)
 ```
-
 ## Parameters
 
 | Functionality         | Description                                                           |
@@ -80,6 +80,7 @@ options:
 | `--only-intendedfor`  | Only updates IntendedFor in fmap JSON files.                          |
 | `--discard-orig`      | Applies changes directly (⚠️ WARNING: irreversible if not backed up). |
 | `--cache`             | Uses diskcache to resume interrupted runs and skip processed items.    |
+| `--no-links`          | Disables creation of hard links; files are copied instead.             |
 | `--path`              | Modify the default root path for the BIDS file (default: rawdata)     |
 
 ## Requirements

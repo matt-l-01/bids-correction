@@ -12,7 +12,7 @@ import diskcache as dc
 cache = {}
 
 
-def rename_run_num(root_directory="rawdata", discard_orig=False):
+def rename_run_num(root_directory="rawdata", discard_orig=False, no_links=False):
     print('Fixing run numbers.')
     parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
     csv_path = os.path.join(parent_dir, 'update_log.csv')
@@ -34,7 +34,7 @@ def rename_run_num(root_directory="rawdata", discard_orig=False):
 
         # Rename JSON file
         rename_file(old_json_path, os.path.basename(
-            new_json_path), modify=discard_orig)
+            new_json_path), modify=discard_orig, no_links=no_links)
 
         # Handle the NIfTI file: replace .json with .nii.gz
         old_nii_path = old_json_path.replace(".json", ".nii.gz")
@@ -42,7 +42,7 @@ def rename_run_num(root_directory="rawdata", discard_orig=False):
 
         if os.path.exists(old_nii_path):
             rename_file(old_nii_path, os.path.basename(
-                new_nii_path), modify=discard_orig)
+                new_nii_path), modify=discard_orig, no_links=no_links)
         else:
             print(f"Missing corresponding NIfTI file: {old_nii_path}")
 
@@ -230,7 +230,7 @@ def generate_log(all_data, root_directory="rawdata"):
 
 
 # Rename a single file with the new file name
-def rename_file(file_path: str, new_file_name: str, modify: bool = False):
+def rename_file(file_path: str, new_file_name: str, modify: bool = False, no_links: bool = False):
     if not os.path.isfile(file_path):
         print(f"{file_path}: Not a file.")
         return
@@ -250,7 +250,10 @@ def rename_file(file_path: str, new_file_name: str, modify: bool = False):
 
         # Create updated hard symlink in the current folder with the new file name
         new_path = os.path.join(dir_name, new_file_name)
-        os.link(orig_path, new_path)
+        if not no_links:
+            os.link(orig_path, new_path)
+        else:
+            shutil.copy2(orig_path, new_path)
         print(f"Linked {new_path} -> {orig_path}")
 
 
@@ -435,6 +438,8 @@ def main():
                         help="This will not generate the log by default (only useful if log already generated)")
     parser.add_argument("--only-intendedfor", action="store_true", default=False,
                         help="This will ONLY run the intended-for fix functions")
+    parser.add_argument("--no-links", action="store_true", default=False,
+                        help="This will NOT create hard links for run-# fixes and copy full files.")
 
     args = parser.parse_args()
 
@@ -471,7 +476,7 @@ def main():
         if not args.skip_log:
             generate_log(all_data=all_data, root_directory=args.path)
         rename_run_num(root_directory=args.path,
-                       discard_orig=args.discard_orig)
+                       discard_orig=args.discard_orig, no_links=args.no_links)
         construct_intendedfor(
             all_data=all_data, root_directory=args.path, discard_orig=args.discard_orig, partial=args.cache)
         return
