@@ -12,7 +12,7 @@ import diskcache as dc
 cache = {}
 
 
-def rename_run_num(root_directory="rawdata", modify_in_place=False):
+def rename_run_num(root_directory="rawdata", discard_orig=False):
     print('Fixing run numbers.')
     parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
     csv_path = os.path.join(parent_dir, 'update_log.csv')
@@ -34,7 +34,7 @@ def rename_run_num(root_directory="rawdata", modify_in_place=False):
 
         # Rename JSON file
         rename_file(old_json_path, os.path.basename(
-            new_json_path), modify=modify_in_place)
+            new_json_path), modify=discard_orig)
 
         # Handle the NIfTI file: replace .json with .nii.gz
         old_nii_path = old_json_path.replace(".json", ".nii.gz")
@@ -42,7 +42,7 @@ def rename_run_num(root_directory="rawdata", modify_in_place=False):
 
         if os.path.exists(old_nii_path):
             rename_file(old_nii_path, os.path.basename(
-                new_nii_path), modify=modify_in_place)
+                new_nii_path), modify=discard_orig)
         else:
             print(f"Missing corresponding NIfTI file: {old_nii_path}")
 
@@ -240,22 +240,21 @@ def rename_file(file_path: str, new_file_name: str, modify: bool = False):
         os.rename(file_path, new_path)
         print(f"[RENAME] {file_path} > {new_path}")
     else:
-        # Create 'changes' directory within the same folder if it doesn't exist
-        changes_dir = os.path.join(dir_name, "changes")
-        os.makedirs(changes_dir, exist_ok=True)
+        # Move original file to 'orig' directory within the same folder if it doesn't exist
+        orig_dir = os.path.join(dir_name, "orig")
+        os.makedirs(orig_dir, exist_ok=True)
+        orig_path = os.path.join(orig_dir, os.path.basename(file_path))
+        if not os.path.exists(orig_path):
+            shutil.move(file_path, orig_path)
+            print(f"Moved original {file_path} > {orig_path}")
 
-        base, ext = os.path.splitext(new_file_name)
-        if ext == ".gz":  # handle .nii.gz
-            base2, ext2 = os.path.splitext(base)
-            new_file_name = f"{base2}{ext2}{ext}"
-        else:
-            new_file_name = f"{base}{ext}"
-        new_path = os.path.join(changes_dir, new_file_name)
-        shutil.copy2(file_path, new_path)
-        print(f"Copied {file_path} > {new_path}")
+        # Create updated hard symlink in the current folder with the new file name
+        new_path = os.path.join(dir_name, new_file_name)
+        os.link(orig_path, new_path)
+        print(f"Linked {new_path} -> {orig_path}")
 
 
-def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=False, partial=False):
+def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False, partial=False):
     '''
     Constructs the intended for from scratch, moving by series number.
     '''
@@ -290,15 +289,18 @@ def construct_intendedfor(all_data, root_directory="rawdata", modify_in_place=Fa
 
             data['IntendedFor'] = new_intended
 
-            if modify_in_place:
+            if discard_orig:
                 out_path = json_path
             else:
-                # Place copy in 'changes' subdir within fmap_dir
-                changes_dir = os.path.join(
-                    os.path.dirname(json_path), "changes")
-                os.makedirs(changes_dir, exist_ok=True)
-                out_path = os.path.join(
-                    changes_dir, os.path.basename(json_path))
+                # Move original file to 'orig' directory within the same folder if it doesn't exist
+                orig_dir = os.path.join(os.path.dirname(json_path), "orig")
+                os.makedirs(orig_dir, exist_ok=True)
+                orig_path = os.path.join(orig_dir, os.path.basename(json_path))
+                if not os.path.exists(orig_path):
+                    shutil.copy2(json_path, orig_path)
+
+                # Write updated file in the current folder
+                out_path = json_path
 
             with open(out_path, 'w', encoding='utf-8') as f:
                 json.dump(data, f, indent=2)
@@ -409,10 +411,9 @@ def main():
     parser = argparse.ArgumentParser(
         description=(
             "AMPSCZ NDA-3 BIDS re-format tool. Please run this script in the same parent folder "
-            "with your rawdata folder, or specify another path using the flags. By default, this "
-            "script will NOT modify anything. FIRST: use the --log flag to output an xlxs files of the list of BIDS names "
-            "that must be updated. Then, WITHOUT the --log flag, use the --rename and --intendedfor flags to copy the current files and make corrections. "
-            "The --modify-in-place flag combined with the prior 2 flags will not make any copies and modify existing files."
+            "with your rawdata folder, or specify another path using the flag. By default, this "
+            "script will keep original files in a subfolder orig/. Run with the fix flag to run all sequences."
+            "If you run with --discard-orig, the original files will be overwritten."
         ),
         prog="update_bids.py",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
@@ -420,32 +421,33 @@ def main():
     parser.prog = "update_bids.py"
     parser.title = "BIDS Correction Tool"
 
-    parser.add_argument("--path", default="rawdata", required=False,
-                        help="Specify a path to the folder containing subject files (optional).")
-    parser.add_argument("--log", action="store_true", default=False,
-                        help="Generate the update log for fixes to be made (MUST BE DONE FIRST).")
     parser.add_argument("--fix", action="store_true", default=False,
                         help="Run the appropriate scripts to fix the run numbers and the intended for list.")
-    parser.add_argument("--modify-in-place", action="store_true", default=False,
-                        help="Instead of copying by default, this will (!) MODIFY (!) current files.")
-    parser.add_argument("--skip-log", action="store_true", default=False,
-                        help="This will not generate the log by default (useful when running a fix on large set)")
-    parser.add_argument("--only-intendedfor", action="store_true", default=False,
-                        help="This will ONLY run the intended for functions")
+    parser.add_argument("--path", default="rawdata", required=False,
+                        help="Specify a path to the rawdata folder containing subject files.")
+    parser.add_argument("--discard-orig", action="store_true", default=False,
+                        help="Instead of copying the original file into an orig folder, this will (!) DELETE (!) old files.")
     parser.add_argument("--cache", action="store_true", default=False,
-                        help="This will store processed subjects if the script is interrupted.")
+                        help="This will store already processed subjects if the script is interrupted on a large set.")
+    parser.add_argument("--log", action="store_true", default=False,
+                        help="Generate just the update log for run-# changes (for testing)")
+    parser.add_argument("--skip-log", action="store_true", default=False,
+                        help="This will not generate the log by default (only useful if log already generated)")
+    parser.add_argument("--only-intendedfor", action="store_true", default=False,
+                        help="This will ONLY run the intended-for fix functions")
 
     args = parser.parse_args()
 
     if not args.log and not args.fix and not args.only_intendedfor:
-        print('At least one action must be specified. Try running with any of the following flags: --log or --fix')
+        parser.print_help()
+        print('At least one action must be specified. Please see above for options.')
         exit(1)
         return
 
-    if args.modify_in_place:
+    if args.discard_orig:
         confirm = input(
-            "\n(!!!) This will modify files. To continue, type 'modify': ").strip().lower()
-        if confirm not in "modify":
+            "\n(!!!) This will delete/modify files. To continue, type 'delete': ").strip().lower()
+        if confirm not in "delete":
             print("Aborting script.")
             exit(0)
             return
@@ -462,16 +464,16 @@ def main():
 
     if args.only_intendedfor:
         construct_intendedfor(
-            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place, partial=args.cache)
+            all_data=all_data, root_directory=args.path, discard_orig=args.discard_orig, partial=args.cache)
         return
 
     if args.fix:
         if not args.skip_log:
             generate_log(all_data=all_data, root_directory=args.path)
         rename_run_num(root_directory=args.path,
-                       modify_in_place=args.modify_in_place)
+                       discard_orig=args.discard_orig)
         construct_intendedfor(
-            all_data=all_data, root_directory=args.path, modify_in_place=args.modify_in_place, partial=args.cache)
+            all_data=all_data, root_directory=args.path, discard_orig=args.discard_orig, partial=args.cache)
         return
 
 
