@@ -454,7 +454,7 @@ def main():
         description=(
             "AMPSCZ NDA-3 BIDS re-format tool. Please run this script in the same parent folder "
             "with your rawdata folder, or specify another path using the flag. By default, this "
-            "script will keep original files in a subfolder orig/. Run with the fix flag to run all sequences."
+            "script will keep original files in a subfolder orig/. Run with the --fix flag to run all sequences. "
             "If you run with --discard-orig, the original files will be overwritten."
         ),
         prog="update_bids.py",
@@ -464,25 +464,25 @@ def main():
     parser.title = "BIDS Correction Tool"
 
     parser.add_argument("--fix", action="store_true", default=False,
-                        help="Run the appropriate scripts to fix the run numbers and the intended for list.")
+                        help="Run all corrections: fix run numbers and fix IntendedFor fields in fMaps.")
     parser.add_argument("--path", default="rawdata", required=False,
                         help="Specify a path to the rawdata folder containing subject files.")
     parser.add_argument("--discard-orig", action="store_true", default=False,
                         help="Instead of copying the original file into an orig folder, this will (!) DELETE (!) old files.")
     parser.add_argument("--cache", action="store_true", default=False,
-                        help="This will store already processed subjects if the script is interrupted on a large set.")
-    parser.add_argument("--log", action="store_true", default=False,
-                        help="Generate just the update log for run-# changes (for testing)")
+                        help="Store already processed subjects if the script is interrupted on a large set.")
+    parser.add_argument("--log-only", action="store_true", default=False,
+                        help="Generate only the update log for run-# changes (update_log.csv) and exit.")
     parser.add_argument("--skip-log", action="store_true", default=False,
-                        help="This will not generate the log by default (only useful if log already generated)")
+                        help="Do not generate the log by default (only useful if log already generated).")
     parser.add_argument("--only-intendedfor", action="store_true", default=False,
-                        help="This will ONLY run the intended-for fix functions")
+                        help="Run ONLY the IntendedFor fix functions.")
     parser.add_argument("--no-links", action="store_true", default=False,
-                        help="This will NOT create hard links for run-# fixes and copy full files.")
+                        help="Do NOT create hard links for run-# fixes; copy full files instead.")
 
     args = parser.parse_args()
 
-    if not args.log and not args.fix and not args.only_intendedfor:
+    if not args.log_only and not args.fix and not args.only_intendedfor:
         parser.print_help()
         print('At least one action must be specified. Please see above for options.')
         exit(1)
@@ -491,7 +491,7 @@ def main():
     if args.discard_orig:
         confirm = input(
             "\n(!!!) This will delete/modify files. To continue, type 'delete': ").strip().lower()
-        if confirm not in "delete":
+        if confirm != "delete":
             print("Aborting script.")
             exit(0)
             return
@@ -502,7 +502,7 @@ def main():
 
     all_data = pull_series_info(root_dir=args.path, partial=args.cache)
 
-    if args.log:
+    if args.log_only:
         generate_log(all_data=all_data, root_directory=args.path)
         return
 
