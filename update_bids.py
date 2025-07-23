@@ -8,6 +8,7 @@ import argparse
 import re
 import pandas as pd
 import diskcache as dc
+import datetime
 
 cache = {}
 
@@ -28,13 +29,23 @@ def rename_run_num(root_directory="rawdata", discard_orig=False, no_links=False)
         print(f"Update log is empty: {csv_path}")
         return
 
+    if not discard_orig:
+        # Make copies to modified dirs
+        to_copy_dirs = set()
+        for _, row in updates_df.iterrows():
+            # Keep track of modified dirs and duplicate first
+            to_copy_dirs.add(os.path.dirname(row["before_path"]))
+
+        for path in to_copy_dirs:
+            copy_entire_folder_to_orig(path)
+
     for _, row in updates_df.iterrows():
         old_json_path = row["before_path"]
         new_json_path = row["after_path"]
 
         # Rename JSON file
         rename_file(old_json_path, os.path.basename(
-            new_json_path), modify=discard_orig, no_links=no_links)
+            new_json_path), discard_orig=discard_orig, no_links=no_links)
 
         # Handle the NIfTI file: replace .json with .nii.gz
         old_nii_path = old_json_path.replace(".json", ".nii.gz")
@@ -42,7 +53,7 @@ def rename_run_num(root_directory="rawdata", discard_orig=False, no_links=False)
 
         if os.path.exists(old_nii_path):
             rename_file(old_nii_path, os.path.basename(
-                new_nii_path), modify=discard_orig, no_links=no_links)
+                new_nii_path), discard_orig=discard_orig, no_links=no_links)
         else:
             print(f"Missing corresponding NIfTI file: {old_nii_path}")
 
@@ -223,38 +234,54 @@ def generate_log(all_data, root_directory="rawdata"):
     # Save to CSV file
     parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
     output_csv_path = os.path.join(parent_dir, 'update_log.csv')
+    # If update_log.csv exists, archive it first
+    if os.path.exists(output_csv_path):
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        archived_path = os.path.join(
+            parent_dir, f'update_log_archived_{timestamp}.csv')
+        os.rename(output_csv_path, archived_path)
+        print(f"Existing update_log.csv archived as: {archived_path}")
+
     updates_df.to_csv(output_csv_path, index=False)
     print(f"\nUpdates exported to log at: {output_csv_path}")
 
     print(json.dumps(updates, indent=4))
 
 
+def copy_entire_folder_to_orig(folder_path, link=True):
+    """
+    Copy all files in folder_path to folder_path/orig using hard links.
+    """
+    orig_dir = os.path.join(folder_path, "orig")
+    os.makedirs(orig_dir, exist_ok=True)
+    for entry in os.scandir(folder_path):
+        if entry.is_file():
+            orig_path = os.path.join(orig_dir, entry.name)
+            if not os.path.exists(orig_path):
+                os.link(entry.path, orig_path) if link else shutil.copy2(
+                    entry.path, orig_path)
+
+
 # Rename a single file with the new file name
-def rename_file(file_path: str, new_file_name: str, modify: bool = False, no_links: bool = False):
+def rename_file(file_path: str, new_file_name: str, discard_orig: bool = False, no_links: bool = False):
     if not os.path.isfile(file_path):
         print(f"{file_path}: Not a file.")
         return
     dir_name = os.path.dirname(file_path)
-    if modify:
-        new_path = os.path.join(dir_name, new_file_name)
-        os.rename(file_path, new_path)
-        print(f"[RENAME] {file_path} > {new_path}")
-    else:
-        # Move original file to 'orig' directory within the same folder if it doesn't exist
+    if not discard_orig:
+        # Create link to originl file in orig if it doesn't already exist (it should)
         orig_dir = os.path.join(dir_name, "orig")
         os.makedirs(orig_dir, exist_ok=True)
         orig_path = os.path.join(orig_dir, os.path.basename(file_path))
         if not os.path.exists(orig_path):
-            shutil.move(file_path, orig_path)
-            print(f"Moved original {file_path} > {orig_path}")
+            os.link(file_path, orig_path) if not no_links else shutil.copy2(
+                file_path, orig_path)
+            print(
+                f"{'Linked' if not no_links else 'Copied'} orig {file_path} > {orig_path}")
 
-        # Create updated hard symlink in the current folder with the new file name
-        new_path = os.path.join(dir_name, new_file_name)
-        if not no_links:
-            os.link(orig_path, new_path)
-        else:
-            shutil.copy2(orig_path, new_path)
-        print(f"Linked {new_path} -> {orig_path}")
+    new_path = os.path.join(dir_name, new_file_name)
+    os.rename(file_path, new_path)
+    print(f"[RENAME] {file_path} > {new_path}")
 
 
 def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False, partial=False):
@@ -300,7 +327,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
                 os.makedirs(orig_dir, exist_ok=True)
                 orig_path = os.path.join(orig_dir, os.path.basename(json_path))
                 if not os.path.exists(orig_path):
-                    shutil.copy2(json_path, orig_path)
+                    os.link(json_path, orig_path)
 
                 # Write updated file in the current folder
                 out_path = json_path
@@ -318,6 +345,18 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
     total_ses = len(all_data)
     curr_ses = 0
 
+    to_copy_fmaps = set()
+    # Copy all fmap folders to orig before modifying IntendedFor
+    for sub_ses, series_lst in all_data.items():
+        for s_path, s_data in series_lst:
+            s_desc = s_data.get('SeriesDescription', '')
+            if 'DistortionMap' in s_desc:
+                fmap_folder = os.path.dirname(s_path)
+                to_copy_fmaps.add(fmap_folder)
+    for path in to_copy_fmaps:
+        copy_entire_folder_to_orig(path, link=False)
+
+    # Construct intended fors
     for sub_ses, series_lst in all_data.items():
         # Skip if this sub_ses is already finished, but only if partial is True
         sub_ses_str = f"IntendedFor({sub_ses[0]}/{sub_ses[1]})"
