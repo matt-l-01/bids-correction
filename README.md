@@ -98,18 +98,23 @@ pip install -r requirements.txt
 * This tool assumes a consistent BIDS directory structure.
 * Only BIDS fields related to `run-XX` and `IntendedFor` are modified.
 
-## File Structure Example
+## File Structure Example (with orig folder)
 
 ```
-parent_folder/
+bids-correction/
     rawdata/
         sub-001/
             ses-01/
                 anat/
-                    sub-001_ses-01_T1w.nii.gz
-                    sub-001_ses-01_T1w.json
+                    orig/
+                        sub-001_ses-01_run-4_T1w.nii.gz
+                        sub-001_ses-01_run-4_T1w.json
+                    sub-001_ses-01_run-1_T1w.nii.gz
+                    sub-001_ses-01_run-1_T1w.json
                 fmap/
-                    sub-001_ses-01_dir-AP_epi.json
+                    orig/
+                        sub-001_ses-01_dir-AP_epi.json 
+                    sub-001_ses-01_dir-AP_epi.json # Updated IntendedFor
     update_bids.py
-    update_log.xlsx
+    update_log.csv
 ```
