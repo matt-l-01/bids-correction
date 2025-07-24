@@ -253,6 +253,10 @@ def copy_entire_folder_to_orig(folder_path, no_links=False):
     Copy all files in folder_path to folder_path/orig using hard links.
     """
     orig_dir = os.path.join(folder_path, "orig")
+    if os.path.exists(orig_dir):
+        print(f"[WARNING] orig folder already exists...skipping: {orig_dir}")
+        return
+
     os.makedirs(orig_dir, exist_ok=True)
     for entry in os.scandir(folder_path):
         if entry.is_file():
@@ -304,7 +308,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
 
     if not discard_orig:
         print(
-            'Making copies of every fmap folder that will be modified.')
+            'Making copies of every fmap folder that will be modified (all of them).')
         to_copy_fmaps = set()
         # Copy ALL fmap folders to orig before modifying IntendedFor
         for sub_ses, series_lst in all_data.items():
