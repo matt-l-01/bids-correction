@@ -37,23 +37,21 @@ def rename_run_num(root_directory="rawdata", discard_orig=False, no_links=False)
             to_copy_dirs.add(os.path.dirname(row["before_path"]))
 
         for path in to_copy_dirs:
-            copy_entire_folder_to_orig(path)
+            copy_entire_folder_to_orig(path, no_links)
 
     for _, row in updates_df.iterrows():
         old_json_path = row["before_path"]
         new_json_path = row["after_path"]
 
         # Rename JSON file
-        rename_file(old_json_path, os.path.basename(
-            new_json_path), discard_orig=discard_orig, no_links=no_links)
+        rename_file(old_json_path, os.path.basename(new_json_path))
 
         # Handle the NIfTI file: replace .json with .nii.gz
         old_nii_path = old_json_path.replace(".json", ".nii.gz")
         new_nii_path = new_json_path.replace(".json", ".nii.gz")
 
         if os.path.exists(old_nii_path):
-            rename_file(old_nii_path, os.path.basename(
-                new_nii_path), discard_orig=discard_orig, no_links=no_links)
+            rename_file(old_nii_path, os.path.basename(new_nii_path))
         else:
             print(f"Missing corresponding NIfTI file: {old_nii_path}")
 
@@ -248,7 +246,7 @@ def generate_log(all_data, root_directory="rawdata"):
     print(json.dumps(updates, indent=4))
 
 
-def copy_entire_folder_to_orig(folder_path, link=True):
+def copy_entire_folder_to_orig(folder_path, no_links=False):
     """
     Copy all files in folder_path to folder_path/orig using hard links.
     """
@@ -258,28 +256,25 @@ def copy_entire_folder_to_orig(folder_path, link=True):
         if entry.is_file():
             orig_path = os.path.join(orig_dir, entry.name)
             if not os.path.exists(orig_path):
-                os.link(entry.path, orig_path) if link else shutil.copy2(
-                    entry.path, orig_path)
+                try:
+                    os.link(entry.path, orig_path) if not no_links else shutil.copy2(
+                        entry.path, orig_path)
+                except OSError as e:
+                    print(
+                        f"[ERROR] Error creating hard link for {entry.path} -> {orig_path}: {e}")
+                    print(
+                        "If you see operation not supported or similar error, please run with --no-links to copy files instead of linking.")
+                    exit(1)
 
 
 # Rename a single file with the new file name
-def rename_file(file_path: str, new_file_name: str, discard_orig: bool = False, no_links: bool = False):
+def rename_file(file_path: str, new_file_name: str):
     if not os.path.isfile(file_path):
         print(f"{file_path}: Not a file.")
         return
     dir_name = os.path.dirname(file_path)
-    if not discard_orig:
-        # Create link to originl file in orig if it doesn't already exist (it should)
-        orig_dir = os.path.join(dir_name, "orig")
-        os.makedirs(orig_dir, exist_ok=True)
-        orig_path = os.path.join(orig_dir, os.path.basename(file_path))
-        if not os.path.exists(orig_path):
-            os.link(file_path, orig_path) if not no_links else shutil.copy2(
-                file_path, orig_path)
-            print(
-                f"{'Linked' if not no_links else 'Copied'} orig {file_path} > {orig_path}")
-
     new_path = os.path.join(dir_name, new_file_name)
+
     os.rename(file_path, new_path)
     print(f"[RENAME] {file_path} > {new_path}")
 
@@ -303,6 +298,18 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
         updates_df = pd.DataFrame(columns=[
                                   'subject', 'session', 'series_desc', 'before_run', 'after_run', 'before_path', 'after_path'])
 
+    if not discard_orig:
+        to_copy_fmaps = set()
+        # Copy ALL fmap folders to orig before modifying IntendedFor
+        for sub_ses, series_lst in all_data.items():
+            for s_path, s_data in series_lst:
+                s_desc = s_data.get('SeriesDescription', '')
+                if 'DistortionMap' in s_desc:
+                    fmap_folder = os.path.dirname(s_path)
+                    to_copy_fmaps.add(fmap_folder)
+        for path in to_copy_fmaps:
+            copy_entire_folder_to_orig(path, no_links=True)
+
     def modify_fmap(json_path, new_intended):
         '''
         Modify a single fmap intended for
@@ -319,20 +326,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
 
             data['IntendedFor'] = new_intended
 
-            if discard_orig:
-                out_path = json_path
-            else:
-                # Move original file to 'orig' directory within the same folder if it doesn't exist
-                orig_dir = os.path.join(os.path.dirname(json_path), "orig")
-                os.makedirs(orig_dir, exist_ok=True)
-                orig_path = os.path.join(orig_dir, os.path.basename(json_path))
-                if not os.path.exists(orig_path):
-                    os.link(json_path, orig_path)
-
-                # Write updated file in the current folder
-                out_path = json_path
-
-            with open(out_path, 'w', encoding='utf-8') as f:
+            with open(json_path, 'w', encoding='utf-8') as f:
                 json.dump(data, f, indent=2)
 
         except Exception as e:
@@ -344,17 +338,6 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
     '''
     total_ses = len(all_data)
     curr_ses = 0
-
-    to_copy_fmaps = set()
-    # Copy all fmap folders to orig before modifying IntendedFor
-    for sub_ses, series_lst in all_data.items():
-        for s_path, s_data in series_lst:
-            s_desc = s_data.get('SeriesDescription', '')
-            if 'DistortionMap' in s_desc:
-                fmap_folder = os.path.dirname(s_path)
-                to_copy_fmaps.add(fmap_folder)
-    for path in to_copy_fmaps:
-        copy_entire_folder_to_orig(path, link=False)
 
     # Construct intended fors
     for sub_ses, series_lst in all_data.items():
