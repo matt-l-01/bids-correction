@@ -260,6 +260,7 @@ def copy_entire_folder_to_orig(folder_path, no_links=False):
                     os.link(entry.path, orig_path) if not no_links else shutil.copy2(
                         entry.path, orig_path)
                 except OSError as e:
+                    print(e)
                     print(
                         f"[ERROR] Error creating hard link for {entry.path} -> {orig_path}: {e}")
                     print(
