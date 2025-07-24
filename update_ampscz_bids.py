@@ -30,6 +30,8 @@ def rename_run_num(root_directory="rawdata", discard_orig=False, no_links=False)
         return
 
     if not discard_orig:
+        print(
+            'Making copies of every folder that will be modified. This may take a while...')
         # Make copies to modified dirs
         to_copy_dirs = set()
         for _, row in updates_df.iterrows():
@@ -266,6 +268,7 @@ def copy_entire_folder_to_orig(folder_path, no_links=False):
                     print(
                         "If you see operation not supported or similar error, please run with --no-links to copy files instead of linking.")
                     exit(1)
+    print(f"{'Copied' if no_links else 'Linked'} {folder_path}")
 
 
 # Rename a single file with the new file name
@@ -300,6 +303,8 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
                                   'subject', 'session', 'series_desc', 'before_run', 'after_run', 'before_path', 'after_path'])
 
     if not discard_orig:
+        print(
+            'Making copies of every fmap folder that will be modified.')
         to_copy_fmaps = set()
         # Copy ALL fmap folders to orig before modifying IntendedFor
         for sub_ses, series_lst in all_data.items():
