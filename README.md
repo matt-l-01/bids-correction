@@ -42,7 +42,7 @@ python update_ampscz_bids.py --fix --discard-orig --cache
 ```
 
 - (! ! !) This will apply all fixes without creating backups.
-- For `--cache` flag may be beneficial on systems that have trouble with computationally intensive tasks, in which the script might get interrupted and need to be restarted (e.g., Amazon Workspaces). It generates a file to keep track of which sessions were completed, and then skips those sessions if the script is re-run with the `--cache` flag again.
+- The `--cache` flag may be beneficial on systems that have trouble with computationally intensive tasks, in which the script might get interrupted and need to be restarted (e.g., Amazon Workspaces). It generates a file to keep track of which sessions were completed, and then skips those sessions if the script is re-run with the `--cache` flag again.
 - The cache is stored locally in the bids-correction folder and automatically managed by the script.
 
 ### Data in a different location from the script
