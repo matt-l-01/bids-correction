@@ -99,7 +99,7 @@ def pull_series_info(root_dir, partial=False):
 
                         if partial:
                             cached_value = cache.get(
-                                f"{session_key[0]}/{session_key[1]}")
+                                f"{session_key[0]}/{session_key[1]}[{root_dir}]")
                             if isinstance(cached_value, dict):
                                 print(
                                     f"Skipping cached pull {session_key}")
@@ -136,7 +136,8 @@ def pull_series_info(root_dir, partial=False):
                 percent_complete = (
                     series_complete / series_total) * 100 if series_total else 0
                 if partial:
-                    cache.set(f'{session_key[0]}/{session_key[1]}', json_data)
+                    cache.set(
+                        f'{session_key[0]}/{session_key[1]}[{root_dir}]', json_data)
                 print(
                     f"({series_complete}/{series_total} : {percent_complete:.1f}%) Pulled {file_path}")
 
@@ -144,7 +145,7 @@ def pull_series_info(root_dir, partial=False):
 
     # Add all the cached data first
     for key in all_keys:
-        key_str = f"{key[0]}/{key[1]}"
+        key_str = f"{key[0]}/{key[1]}[{root_dir}]"
         # Ignore keys not in cache
         if key_str not in cache:
             continue
@@ -352,7 +353,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
     # Construct intended fors
     for sub_ses, series_lst in all_data.items():
         # Skip if this sub_ses is already finished, but only if partial is True
-        sub_ses_str = f"IntendedFor({sub_ses[0]}/{sub_ses[1]})"
+        sub_ses_str = f"[{root_directory}]IntendedFor({sub_ses[0]}/{sub_ses[1]})"
         if partial:
             if sub_ses_str in cache and cache.get(sub_ses_str):
                 print(f'Skipping {sub_ses_str}')
