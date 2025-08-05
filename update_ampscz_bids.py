@@ -403,6 +403,20 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
                 end_series = 9999  # until end
             fmap_pairs[key] = (ap, pa, (start_series, end_series))
 
+        # Find any run # updates for fmap paths and make the changes internally
+        for key, (ap, pa, range) in fmap_pairs.items():
+            # Check for AP update
+            ap_update = updates_df[updates_df['before_path'] == ap[0]]
+            if not ap_update.empty:
+                ap = (ap_update['after_path'].values[0], ap[1])
+
+            # Check for PA update
+            pa_update = updates_df[updates_df['before_path'] == pa[0]]
+            if not pa_update.empty:
+                pa = (pa_update['after_path'].values[0], pa[1])
+
+            fmap_pairs[key] = (ap, pa, range)
+
         # For each fmap pair, find all series in the range and update IntendedFor
         for key, (ap, pa, range) in fmap_pairs.items():
             intended_for = []
