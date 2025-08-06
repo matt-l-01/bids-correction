@@ -38,7 +38,7 @@ def rename_run_num(root_directory="rawdata", discard_orig=False, no_links=False)
             # Keep track of modified dirs and duplicate first
             to_copy_dirs.add(os.path.dirname(row["before_path"]))
 
-        for path in to_copy_dirs:
+        for path in sorted(to_copy_dirs):
             copy_entire_folder_to_orig(path, no_links)
 
     for _, row in updates_df.iterrows():
@@ -243,6 +243,7 @@ def generate_log(all_data, root_directory="rawdata"):
         os.rename(output_csv_path, archived_path)
         print(f"Existing update_log.csv archived as: {archived_path}")
 
+    updates_df.sort_values(by=['subject', 'session'], inplace=True)
     updates_df.to_csv(output_csv_path, index=False)
     print(f"\nUpdates exported to log at: {output_csv_path}")
 
@@ -318,7 +319,8 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
                 if 'DistortionMap' in s_desc:
                     fmap_folder = os.path.dirname(s_path)
                     to_copy_fmaps.add(fmap_folder)
-        for path in to_copy_fmaps:
+
+        for path in sorted(to_copy_fmaps):
             copy_entire_folder_to_orig(path, no_links=True)
 
     def modify_fmap(json_path, new_intended):
@@ -509,6 +511,8 @@ def main():
         cache = dc.Cache('cache')
 
     all_data = pull_series_info(root_dir=args.path, partial=args.cache)
+    # Sort all_data by key (sub_ses)
+    all_data = dict(sorted(all_data.items(), key=lambda x: x[0]))
 
     if args.log_only:
         generate_log(all_data=all_data, root_directory=args.path)
