@@ -71,11 +71,11 @@ def read_json_file(file_path):
 all_keys = set()
 
 
-def pull_series_info(root_dir, partial=False):
+def pull_series_info(root_dir, partial=False, threads=8):
     print('Pulling series info.')
 
     series_total = 0
-    with ThreadPoolExecutor(max_workers=8) as executor:
+    with ThreadPoolExecutor(max_workers=threads) as executor:
         futures = {}  # maps future -> (subject, session)
 
         with os.scandir(root_dir) as subjects:
@@ -489,6 +489,8 @@ def main():
                         help="Run ONLY the IntendedFor fix functions.")
     parser.add_argument("--no-links", action="store_true", default=False,
                         help="Do NOT create hard links for run-# fixes; copy full files instead.")
+    parser.add_argument("--threads", type=int, default=8,
+                        help="Number of threads to use for multi-threaded pulling operation. Only for pulling json data.")
 
     args = parser.parse_args()
 
@@ -510,7 +512,8 @@ def main():
         global cache
         cache = dc.Cache('cache')
 
-    all_data = pull_series_info(root_dir=args.path, partial=args.cache)
+    all_data = pull_series_info(
+        root_dir=args.path, partial=args.cache, threads=args.threads)
     # Sort all_data by key (sub_ses)
     all_data = dict(sorted(all_data.items(), key=lambda x: x[0]))
 

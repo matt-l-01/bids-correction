@@ -70,6 +70,7 @@ options:
   --skip-log          Do not generate the log by default (only useful if log already generated). (default: False)
   --only-intendedfor  Run ONLY the IntendedFor fix functions. (default: False)
   --no-links          Do NOT create hard links for run-# fixes; copy full files instead. (default: False)
+  --threads THREADS   Number of threads to use for multi-threaded pulling operation. Only for pulling json data. (default: 8)
 ```
 
 ## Requirements
