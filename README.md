@@ -105,4 +105,34 @@ bids-correction/
                     orig/
                         sub-001_ses-01_dir-AP_epi.json 
                     sub-001_ses-01_dir-AP_epi.json # IntendedFor field fixed for AMP-SCZ Release 3.0
+                dwi/
+                    ...unchanged files...
+                func/
+                    ...unchanged files...
+```
+
+## File Structure Example (with --separate-orig flag)
+
+```
+bids-correction/
+    rawdata/
+        sub-001/
+            ses-01/
+                anat/
+                    sub-001_ses-01_run-1_T1w.nii.gz
+                    sub-001_ses-01_run-1_T1w.json
+                fmap/
+                    sub-001_ses-01_dir-AP_epi.json # IntendedFor field fixed for AMP-SCZ Release 3.0
+                dwi/
+                    ...unchanged files...
+                func/
+                    ...unchanged files...
+    rawdata_orig/
+        sub-001/
+            ses-01/
+                anat/
+                    sub-001_ses-01_run-4_T1w.nii.gz
+                    sub-001_ses-01_run-4_T1w.json
+                fmap/
+                    sub-001_ses-01_dir-AP_epi.json
 ```
