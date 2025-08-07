@@ -13,7 +13,7 @@ import datetime
 cache = {}
 
 
-def rename_run_num(root_directory="rawdata", discard_orig=False, no_links=False):
+def rename_run_num(root_directory="rawdata", discard_orig=False, no_links=False, separate_orig=False):
     print('Fixing run numbers.')
     parent_dir = os.path.dirname(os.path.abspath(root_directory.rstrip("/")))
     csv_path = os.path.join(parent_dir, 'update_log.csv')
@@ -39,7 +39,8 @@ def rename_run_num(root_directory="rawdata", discard_orig=False, no_links=False)
             to_copy_dirs.add(os.path.dirname(row["before_path"]))
 
         for path in sorted(to_copy_dirs):
-            copy_entire_folder_to_orig(path, no_links)
+            copy_entire_folder_to_orig(
+                path, no_links, separate_orig=separate_orig)
 
     for _, row in updates_df.iterrows():
         old_json_path = row["before_path"]
@@ -250,11 +251,21 @@ def generate_log(all_data, root_directory="rawdata"):
     print(json.dumps(updates, indent=4))
 
 
-def copy_entire_folder_to_orig(folder_path, no_links=False):
+def copy_entire_folder_to_orig(folder_path, no_links=False, separate_orig=False):
     """
     Copy all files in folder_path to folder_path/orig using hard links.
     """
-    orig_dir = os.path.join(folder_path, "orig")
+    if separate_orig:
+        # Create a separate orig root at the same level as root_dir
+        ses_dir = os.path.abspath(os.path.join(folder_path, os.pardir))
+        sub_dir = os.path.abspath(os.path.join(ses_dir, os.pardir))
+        root_dir = os.path.abspath(os.path.join(sub_dir, os.pardir))
+        orig_root = root_dir + "_orig"
+        # Recreate the relative path inside orig_root
+        rel_path = os.path.relpath(folder_path, root_dir)
+        orig_dir = os.path.join(orig_root, rel_path)
+    else:
+        orig_dir = os.path.join(folder_path, "orig")
     if os.path.exists(orig_dir):
         print(f"[WARNING] orig folder already exists...skipping: {orig_dir}")
         return
@@ -289,7 +300,7 @@ def rename_file(file_path: str, new_file_name: str):
     print(f"[RENAME] {file_path} > {new_path}")
 
 
-def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False, partial=False):
+def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False, partial=False, separate_orig=False):
     '''
     Constructs the intended for from scratch, moving by series number.
     '''
@@ -321,7 +332,8 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
                     to_copy_fmaps.add(fmap_folder)
 
         for path in sorted(to_copy_fmaps):
-            copy_entire_folder_to_orig(path, no_links=True)
+            copy_entire_folder_to_orig(
+                path, no_links=True, separate_orig=separate_orig)
 
     def modify_fmap(json_path, new_intended):
         '''
@@ -491,6 +503,8 @@ def main():
                         help="Do NOT create hard links for run-# fixes; copy full files instead.")
     parser.add_argument("--threads", type=int, default=8,
                         help="Number of threads to use for multi-threaded pulling operation. Only for pulling json data.")
+    parser.add_argument("--separate-orig", action="store_true", default=False,
+                        help="Orig files will be stored in a separate root dir at same level of BIDs root. Eg: rawdata_orig")
 
     args = parser.parse_args()
 
@@ -522,17 +536,17 @@ def main():
         return
 
     if args.only_intendedfor:
-        construct_intendedfor(
-            all_data=all_data, root_directory=args.path, discard_orig=args.discard_orig, partial=args.cache)
+        construct_intendedfor(all_data=all_data, root_directory=args.path,
+                              discard_orig=args.discard_orig, partial=args.cache, separate_orig=args.separate_orig)
         return
 
     if args.fix:
         if not args.skip_log:
             generate_log(all_data=all_data, root_directory=args.path)
-        rename_run_num(root_directory=args.path,
-                       discard_orig=args.discard_orig, no_links=args.no_links)
-        construct_intendedfor(
-            all_data=all_data, root_directory=args.path, discard_orig=args.discard_orig, partial=args.cache)
+        rename_run_num(root_directory=args.path, discard_orig=args.discard_orig,
+                       no_links=args.no_links, separate_orig=args.separate_orig)
+        construct_intendedfor(all_data=all_data, root_directory=args.path,
+                              discard_orig=args.discard_orig, partial=args.cache, separate_orig=args.separate_orig)
         return
 
 

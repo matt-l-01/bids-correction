@@ -71,6 +71,7 @@ options:
   --only-intendedfor  Run ONLY the IntendedFor fix functions. (default: False)
   --no-links          Do NOT create hard links for run-# fixes; copy full files instead. (default: False)
   --threads THREADS   Number of threads to use for multi-threaded pulling operation. Only for pulling json data. (default: 8)
+  --separate-orig     Orig files will be stored in a separate root dir at same level of BIDs root. Eg: rawdata_orig (default: False)
 ```
 
 ## Requirements
