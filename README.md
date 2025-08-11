@@ -55,17 +55,19 @@ python update_ampscz_bids.py --path /path/to/bids_data --fix
 
 ## Description
 ```bash
-usage: update_ampscz_bids.py [-h] [--fix] [--path PATH] [--discard-orig] [--cache] [--log-only] [--skip-log] [--only-intendedfor] [--no-links]
+usage: update_bids.py [-h] [--fix] [--path PATH] [--discard-orig] [--cache] [--log-only] [--skip-log] [--only-intendedfor] [--no-links] [--threads THREADS]
+                      [--separate-orig]
 
-AMPSCZ NDA-3 BIDS re-format tool. Please run this script in the same parent folder with your rawdata folder, or specify another path using the --path flag. By default, this script
-will keep a copy of the original files in a subfolder named "orig/". Run with the --fix flag to run all corrections. If you run with --discard-orig, no copy of the original files will be preserved.
+AMPSCZ NDA-3 BIDS re-format tool. Please run this script in the same parent folder with your rawdata folder, or specify another path using the flag. By default,
+this script will keep original files in a subfolder orig/. Run with the --fix flag to run all sequences. If you run with --discard-orig, the original files will be
+overwritten.
 
 options:
   -h, --help          show this help message and exit
-  --fix               Run all corrections: fix run numbers in file name and fix IntendedFor fields in fmap JSONs. (default: False)
+  --fix               Run all corrections: fix run numbers and fix IntendedFor fields in fMaps. (default: False)
   --path PATH         Specify a path to the rawdata folder containing subject files. (default: rawdata)
-  --discard-orig      This will (!) DELETE (!) the original copy of the files that is otherwise created. (default: False)
-  --cache             Keep a record of already processed sessions, in case the script is interrupted. (default: False)
+  --discard-orig      Instead of copying the original file into an orig folder, this will (!) DELETE (!) old files. (default: False)
+  --cache             Store already processed subjects if the script is interrupted on a large set. (default: False)
   --log-only          Generate only the update log for run-# changes (update_log.csv) and exit. (default: False)
   --skip-log          Do not generate the log by default (only useful if log already generated). (default: False)
   --only-intendedfor  Run ONLY the IntendedFor fix functions. (default: False)
