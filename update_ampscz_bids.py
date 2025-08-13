@@ -381,7 +381,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
         fmap_list = []
         # Collect all fmap (AP/PA) in order
         for s_path, s_data in series_lst:
-            if s_data.get('SeriesDescription') in ['DistortionMap_AP', 'DistortionMap_PA']:
+            if 'DistortionMap_AP' in s_data.get('SeriesDescription') or 'DistortionMap_PA' in s_data.get('SeriesDescription'):
                 fmap_list.append((s_path, s_data))
 
         # Pair up AP/PA fmaps (assuming they alternate) into fmap_pairs
@@ -390,7 +390,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
         while i < len(fmap_list) - 1:
             ap = fmap_list[i]
             pa = fmap_list[i + 1]
-            if ap[1].get('SeriesDescription') == 'DistortionMap_AP' and pa[1].get('SeriesDescription') == 'DistortionMap_PA':
+            if 'DistortionMap_AP' in ap[1].get('SeriesDescription') and 'DistortionMap_PA' in pa[1].get('SeriesDescription'):
                 fmap_pair_count += 1
                 fmap_pairs[fmap_pair_count] = (
                     ap, pa, None)  # range to be filled below
@@ -443,7 +443,7 @@ def construct_intendedfor(all_data, root_directory="rawdata", discard_orig=False
                     range[0] <= s_num <= range[1]
                     and not 'DistortionMap' in s_desc
                     and not 'dMRI' in s_desc
-                    and not 'SBRef' in s_desc
+                    and not 'Ref' in s_desc
                 ):
                     rel_path = os.path.relpath(s_path, start=root_directory)
 
