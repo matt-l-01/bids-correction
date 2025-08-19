@@ -171,7 +171,7 @@ def pull_series_info(root_dir, partial=False, threads=8):
     return session_data_final
 
 
-def generate_log(all_data, root_directory="rawdata"):
+def generate_log(all_data, root_directory="rawdata", logpath="rawdata"):
     print('Generating log.')
     updates = []
 
@@ -245,6 +245,8 @@ def generate_log(all_data, root_directory="rawdata"):
         print(f"Existing update_log.csv archived as: {archived_path}")
 
     updates_df.sort_values(by=['subject', 'session'], inplace=True)
+    if logpath != 'rawdata':
+        output_csv_path = os.path.join(logpath, 'update_log.csv')
     updates_df.to_csv(output_csv_path, index=False)
     print(f"\nUpdates exported to log at: {output_csv_path}")
 
@@ -489,6 +491,8 @@ def main():
                         help="Run all corrections: fix run numbers and fix IntendedFor fields in fMaps.")
     parser.add_argument("--path", default="rawdata", required=False,
                         help="Specify a path to the rawdata folder containing subject files.")
+    parser.add_argument("--logpath", default="rawdata", required=False,
+                        help="Specify a path specifically for the output log")
     parser.add_argument("--discard-orig", action="store_true", default=False,
                         help="Instead of copying the original file into an orig folder, this will (!) DELETE (!) old files.")
     parser.add_argument("--cache", action="store_true", default=False,
@@ -532,7 +536,8 @@ def main():
     all_data = dict(sorted(all_data.items(), key=lambda x: x[0]))
 
     if args.log_only:
-        generate_log(all_data=all_data, root_directory=args.path)
+        generate_log(all_data=all_data, root_directory=args.path,
+                     logpath=args.logpath)
         return
 
     if args.only_intendedfor:
